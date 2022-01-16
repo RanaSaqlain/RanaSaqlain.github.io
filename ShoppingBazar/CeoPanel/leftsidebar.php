@@ -24,6 +24,18 @@ require_once"auth_session.php";
                 <span class="nav-link-text">Create New Admin</span>
               </a>
             </li>
+              <li class="nav-item">
+              <a class="nav-link" href="Manager.php">
+                <i class="ni ni-tv-2 text-primary"></i>
+                <span class="nav-link-text">Manager</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="order-details.php">
+                <i class="ni ni-tv-2 text-primary"></i>
+                <span class="nav-link-text">Order Details</span>
+              </a>
+            </li>
             <li class="nav-item">
               <a class="nav-link" href="logout.php">
                 <i class="ni ni-planet text-orange"></i>
