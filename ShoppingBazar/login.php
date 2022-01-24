@@ -11,11 +11,24 @@ $_SESSION['Admin']['Image'] = $_COOKIE['Admin_Image'];
 header("Location:CeoPanel/index.php");
   
 }
+if (isset($_COOKIE['managerid'])) {
+
+$_SESSION['Manager']["id"]  = $_COOKIE['managerid'];
+$_SESSION['Manager']['Name'] = $_COOKIE['managername'];
+
+
+header("Location:ManagerPanel/index.php");
+  
+}
 
 
 if(isset($_SESSION['Admin'])!="")
  {
 header("Location: CeoPanel/index.php");
+}
+if(isset($_SESSION['Manager'])!="")
+ {
+header("Location: ManagerPanel/index.php");
 }
 if (isset($_POST['Submit'])) {
 
@@ -23,9 +36,10 @@ $email = mysqli_real_escape_string($con, $_POST['email']);
 $password = mysqli_real_escape_string($con, $_POST['pass']);
 $login="SELECT * FROM `admin` WHERE Email='$email' AND Password =md5('$password')";
 $result=mysqli_query($con,$login);
-if(!empty($result)){
+if($result){
 $row = mysqli_fetch_array($result);
-
+if(!empty($row))
+{
 $_SESSION['Admin']["id"] = $row['Admin_ID'];
 $_SESSION['Admin']['FName'] = $row['FName'];
 $_SESSION['Admin']['Email'] = $row['Email'];
@@ -42,9 +56,37 @@ if(isset($_POST['checkcookie']))
     setcookie("Admin_FName",$cookie_adminfname, time() + (86400 * 30), "/") ;
     setcookie("Admin_Email",$cookie_adminEmail, time() + (86400 * 30), "/") ;
     setcookie("Admin_Image",$cookie_adminImage, time() + (86400 * 30), "/") ;
-   
-header("Location: CeoPanel/index.php");
+}
 
+header("Location: CeoPanel/index.php");
+}
+else {
+
+ $login="SELECT * FROM `manager` WHERE Email='$email' AND Password ='$password'";
+
+$result=mysqli_query($con,$login);
+if($result){
+ 
+$row = mysqli_fetch_array($result);
+if(!empty($row))
+{
+
+$_SESSION['Manager']["id"] = $row['mid'];
+$_SESSION['Manager']['Name'] = $row['Name'];
+
+if(isset($_POST['checkcookie']))
+{
+  $cookie_Managerid  = $row['mid'];
+  $cookie_Managername = $row['Name'];
+ 
+
+    setcookie("managerid",$cookie_Managerid, time() + (86400 * 30), "/") ;
+    setcookie("managername",$cookie_Managername, time() + (86400 * 30), "/") ;
+
+
+}
+
+header("Location: ManagerPanel/index.php");
 }
 else {
 $error=true;
@@ -53,6 +95,18 @@ $error=true;
 }
 
 }
+
+}
+else{
+
+}
+
+
+
+}
+
+
+
 ?>
 
 <!DOCTYPE html>
@@ -105,6 +159,7 @@ $error=true;
          
           <li class="nav-item">
             <a href="login.php" class="nav-link">
+             <span style="color:#e69d85">Shop<span style="color:#f2ec74;" >ping</span><span  style="color:#bde685;">Bazar</span></span>
               <span class="nav-link-inner--text">Login</span>
             </a>
           </li>
@@ -149,7 +204,7 @@ $error=true;
           <div class="row justify-content-center">
             <div class="col-xl-5 col-lg-6 col-md-8 px-5">
               <h1 class="text-white"> !  Welcome  !</h1>
-              <p class="text-lead text-white">Sign In to DashBoard</p>
+              <p class="text-lead text-white">Sign In to ShoppingBazar</p>
             </div>
           </div>
         </div>
@@ -223,7 +278,7 @@ if($error){
       <div class="row align-items-center justify-content-xl-between">
         <div class="col-xl-6">
           <div class="copyright text-center text-xl-left text-muted">
-            &copy; 2020 <a href="" class="font-weight-bold ml-1" target="_blank">Shopping Bazar</a>
+            &copy; 2022 <a href="" class="font-weight-bold ml-1" target="_blank">Shopping Bazar</a>
           </div>
         </div>
         <div class="col-xl-6">
