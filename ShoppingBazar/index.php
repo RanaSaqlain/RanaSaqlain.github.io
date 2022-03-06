@@ -124,7 +124,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                             <div class="col-md-4 col-lg-3 col-sm-6 col-xs-12">
                                 <div class="category">
                                     <div class="ht__cat__thumb">
-                                        <a href="product-details.php">
+                                        <a href="ProductDetail.php?id=<?php echo $list['product_id'] ?>">
                                             <img src="<?php echo $list['product_Image'] ?>">
                                         </a>
                                     </div>

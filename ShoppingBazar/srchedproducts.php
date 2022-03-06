@@ -18,7 +18,7 @@
  <section class="htc__product__grid bg__white ptb-100">
             <div class="container">
                 <div class="row">
-                    <div class="col-lg-9  col-md-9 col-sm-12 col-xs-12">
+                    <div class="col-lg-12  col-md-12 col-sm-12 col-xs-12">
                         <div class="htc__product__rightidebar">
                             <div class="htc__grid__top">
                                 <div class="htc__select__option">
@@ -50,10 +50,10 @@
 
                             ?>
                             <!-- Start Single Category -->
-                            <div class="col-md-4 col-lg-4 col-sm-6 col-xs-12">
+                            <div class="col-md-4 col-lg-3 col-sm-6 col-xs-12">
                                 <div class="category">
                                     <div class="ht__cat__thumb">
-                                        <a href="product-details.php">
+                                        <a href="ProductDetail.php?id=<?php echo $list['product_id'] ?>">
                                             <img src="<?php echo $list['product_Image'] ?>">
                                         </a>
                                     </div>
@@ -94,10 +94,10 @@
                                                 <!-- Start List Product -->
                                                 <div class="ht__list__product">
                                                     <div class="ht__list__thumb">
-                                                        <a href="product-details.html"><img src="<?php echo $list['product_Image'] ?>" alt="product images"></a>
+                                                        <a href="ProductDetail.php?id=<?php echo $list['product_id'] ?>"><img src="<?php echo $list['product_Image'] ?>" alt="product images"></a>
                                                     </div>
                                                     <div class="htc__list__details">
-                                                        <h2><a href="product-details.html"><?php echo $list['product_Name'] ?> </a></h2>
+                                                        <h2><a href="ProductDetail.php?id=<?php echo $list['product_id'] ?>"><?php echo $list['product_Name'] ?> </a></h2>
                                                         <ul  class="pro__prize">
                                                             <li class="old__prize">$<?php echo $list['product_sprice']?></li>
                                                             <li>$75.2</li>

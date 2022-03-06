@@ -112,7 +112,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                             <div class="col-md-4 col-lg-4 col-sm-6 col-xs-12">
                                 <div class="category">
                                     <div class="ht__cat__thumb">
-                                        <a href="product-details.php">
+                                        <a href="ProductDetail.php?id=<?php echo $list['product_id'] ?>">
                                             <img src="<?php echo $list['product_Image'] ?>">
                                         </a>
                                     </div>
@@ -126,7 +126,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                         </ul>
                                     </div>
                                     <div class="fr__product__inner">
-                                        <h4><a href="product-details.php"><?php echo $list['product_Name'] ?></a></h4>
+                                        <h4><a href="ProductDetail.php?id=<?php echo $list['product_id'] ?>"><?php echo $list['product_Name'] ?></a></h4>
                                         <ul class="fr__pro__prize">
                                         
                                             <li><?php echo $list['product_sprice']."$" ?></li>
@@ -153,7 +153,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                                 <!-- Start List Product -->
                                                 <div class="ht__list__product">
                                                     <div class="ht__list__thumb">
-                                                        <a href="product-details.html"><img src="<?php echo $list['product_Image'] ?>" alt="product images"></a>
+                                                        <a href="ProductDetail.php?id=<?php echo $list['product_id'] ?>"><img src="<?php echo $list['product_Image'] ?>" alt="product images"></a>
                                                     </div>
                                                     <div class="htc__list__details">
                                                         <h2><a href="product-details.html"><?php echo $list['product_Name'] ?> </a></h2>
