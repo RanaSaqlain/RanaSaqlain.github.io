@@ -58,7 +58,7 @@ Which Programing  Languages  been used
 •	Download the Shopping Bazar Folder from the Repository -> https://github.com/RanaSaqlain/RanaSaqlain.github.io
 •	Place the folder  in your htdocs
 •	Open your Phpmyadmin 
-•	 In Database folder  there is the  database of the Project  , must be named  with Final  db .    create an database name of ShoppingBazar  and import the The final db at your machine.
+•	 In Database folder  there is the  database of the Project  , must be named  with ShoppingBazar (1).sql  db .    create an database name of ShoppingBazar  and import the The final db at your machine.
 •	Now  type Url Localhost/ folder path.  Admin Password msaqlain6666@gmail.com , 1234
 
 Do not use it for Commercial Purposes.
