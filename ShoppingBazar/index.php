@@ -1,7 +1,10 @@
 <?php 
+
  $srched = array();
+
 require_once('top.php');
 require_once "function.php";
+require 'db.php';
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if( isset($_POST["srchbtn"]) )
     {
@@ -9,10 +12,21 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
      
       $srched=  get_searched_product($con , $srch);
     }
+
+    if(isset($_POST['addtocart']))
+    {
+       $id = $_POST['pid'];        
+     $response = addtocart($con,$id);
+     if ($response != null) {
+        echo '<script type="text/javascript">
+    swal("Shopping Bazar!", "'.$response.'");
+</script>';}
+    }
+
 }
 ?>
 
-        <div class="body__overlay"></div>
+       <div class="body__overlay"></div>
         <!-- Start Offset Wrapper -->
         <div class="offset__wrapper">
             <!-- Start Search Popap -->
@@ -124,7 +138,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                             <div class="col-md-4 col-lg-3 col-sm-6 col-xs-12">
                                 <div class="category">
                                     <div class="ht__cat__thumb">
-                                        <a href="product-details.php">
+                                        <a href="ProductDetail.php?id=<?php echo $list['product_id'] ?>">
                                             <img src="<?php echo $list['product_Image'] ?>">
                                         </a>
                                     </div>
@@ -132,7 +146,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                         <ul class="product__action">
                                             <li><a href="wishlist.php"><i class="icon-heart icons"></i></a></li>
 
-                                            <li><a href="cart.php"><i class="icon-handbag icons"></i></a></li>
+                                            <li>
+                                                <form action="index.php" method="post" >
+                                                    <input type="hidden" name="pid" value="<?php echo $list['product_id'] ?>">
+                                                    <button type="submit" name="addtocart" >
+                                                        <a><i class="icon-handbag icons"></i></a></button>
+                                                </form>
+                                                
+                                            </li>
 
                                             <li><a href="#"><i class="icon-shuffle icons"></i></a></li>
                                         </ul>
@@ -160,6 +181,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
        
         <!-- End Product Area -->
         <!-- Start Footer Area -->
+
      <?php 
      require('footer.php');
  ?>
