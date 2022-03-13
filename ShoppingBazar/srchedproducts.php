@@ -1,3 +1,5 @@
+
+
 <!-- Searched product area starts -->
                    <div  style="margin-bottom: 2rem;">
                     <div class="ht__bradcaump__wrap">
@@ -18,7 +20,7 @@
  <section class="htc__product__grid bg__white ptb-100">
             <div class="container">
                 <div class="row">
-                    <div class="col-lg-12  col-md-12 col-sm-12 col-xs-12">
+                    <div class="col-12">
                         <div class="htc__product__rightidebar">
                             <div class="htc__grid__top">
                                 <div class="htc__select__option">
@@ -61,7 +63,11 @@
                                         <ul class="product__action">
                                             <li><a href="wishlist.php"><i class="icon-heart icons"></i></a></li>
 
-                                            <li><a href="cart.php"><i class="icon-handbag icons"></i></a></li>
+                                            <li><form action="" method="post" >
+                                                    <input type="hidden" name="pid" value="<?php echo $list['product_id'] ?>">
+                                                    <button type="submit" name="addtocart" >
+                                                       <a><i class="icon-handbag icons"></i></a></button>
+                                                </form></li>
 
                                             <li><a href="#"><i class="icon-shuffle icons"></i></a></li>
                                         </ul>
@@ -111,7 +117,11 @@
                                                         </ul>
                                                         <p><?php echo $list['product_Description'] ?></p>
                                                         <div class="fr__list__btn">
-                                                            <a class="fr__btn" href="cart.html">Add To Cart</a>
+                                                            <form action="" method="post" >
+                                                    <input type="hidden" name="pid" value="<?php echo $list['product_id'] ?>">
+                                                    <button type="submit" name="addtocart" >
+                                                        <a class="fr__btn">Add To Cart</a></button>
+                                                </form>
                                                         </div>
                                                     </div>
                                                 </div>

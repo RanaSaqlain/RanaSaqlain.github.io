@@ -1,6 +1,9 @@
 <?php 
  $srched = array();
+
 require_once('top.php');
+require_once "function.php";
+require 'db.php';
 $product_id=mysqli_real_escape_string($con,$_GET['id']);
 $get_product=get_products_detail($con,$product_id);
  $catid=mysqli_real_escape_string($con,$_GET['id']);
@@ -12,8 +15,25 @@ $get_product=get_products_detail($con,$product_id);
      
       $srched=  get_searched_product($con , $srch);
     }
+    if(isset($_POST['addtocart']))
+    {
+       $id = $_POST['pid'];
+        $response = addtocart($con,$id);
+     if ($response != null) {
+         echo '<script type="text/javascript">
+    swal("Shopping Bazar!", "'.$response.'");
+</script>';  }          
+
+    }
+
+
+
 }
 ?>
+
+        <div class="body__overlay"></div>
+        <!-- Start Offset Wrapper -->
+        <div class="offset__wrapper">
 <!-- Start Search Popap -->
             <div class="search__area">
                 <div class="container" >
@@ -34,14 +54,19 @@ $get_product=get_products_detail($con,$product_id);
                 </div>
             </div>
             <!-- End Search Popap -->
+ <?php include("Cart.php"); ?>
+        </div>
             <?php 
 
                     if ($srched != null) {
                             include("srchedproducts.php");
                     }
                    ?>
-  <div class="ht__bradcaump__area" >
+   
+
+  <div class="ht__bradcaump__area"  style="background: rgba(0, 0, 0, 0) url(#) no-repeat scroll center center / cover ;" >
             <div class="ht__bradcaump__wrap" >
+
                 <div class="container">
                     <div class="row" >
                       
@@ -110,8 +135,13 @@ $get_product=get_products_detail($con,$product_id);
                                     
                                     </div>
                                      <div class="fr__list__btn " style="margin-top:1rem;">
-                                                            <a class="fr__btn" href="cart.html">Add To Cart</a>
-                                                        </div>
+                                             <form action="" method="post" >
+                                                    <input type="hidden" name="pid" value="<?php echo $list['product_id'] ?>">
+                                                    <button type="submit" name="addtocart" >
+                                                        <a class="fr__btn">Add To Cart</a></button>
+                                                </form>
+                                                            
+                                  </div>
                                 </div>
 
                         </div>

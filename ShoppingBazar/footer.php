@@ -102,6 +102,22 @@
 
     <!-- jquery latest version -->
     <script src="assets/ShopPage/js/vendor/jquery-3.2.1.min.js"></script>
+    <script type="text/javascript">
+         $(document).ready(function() {
+           $(window).on("beforeunload", function() { 
+              $.ajax({
+                      url:"function.php",
+                      method:"post",
+                      dataType:"json",
+                      data:{opp:"cookie"},
+                      success:function(response){
+                       
+
+        }
+     });
+            });
+        });
+    </script>
     <!-- Bootstrap framework js -->
     <script src="assets/ShopPage/js/bootstrap.min.js"></script>
     <!-- All js plugins included in this file. -->
@@ -112,7 +128,7 @@
     <script src="assets/ShopPage/js/waypoints.min.js"></script>
     <!-- Main js file that contents all jQuery plugins activation. -->
     <script src="assets/ShopPage/js/main.js"></script>
-
+    
 </body>
 
 </html>

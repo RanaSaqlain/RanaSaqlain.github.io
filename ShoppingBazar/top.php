@@ -1,4 +1,5 @@
 <?php
+
 require('db.php');
 require('function.php');
 $cat_res=mysqli_query($con,"select * from category where Category_Status=1");
@@ -7,6 +8,7 @@ while($row=mysqli_fetch_assoc($cat_res))
 {
   $cat_arr[]=$row;
 }
+$counter = 0;
  ?> 
 <!doctype html>
 <html class="no-js" lang="en">
@@ -40,6 +42,8 @@ while($row=mysqli_fetch_assoc($cat_res))
 
     <!-- Modernizr JS -->
     <script src="assets/ShopPage/js/vendor/modernizr-3.5.0.min.js"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
 </head>
 
 <body>
@@ -63,7 +67,10 @@ while($row=mysqli_fetch_assoc($cat_res))
                                     <ul class="main__menu">
                                         <li class="drop"><a href="index.php">Home</a></li>
                                    <li class="drop"><a href="#">Categories</a>
-                                            <ul class="dropdown ">
+                                    <ul class="dropdown mega_dropdown">
+                                                <!-- Start Single Mega MEnu -->
+                                                <li><a class="mega__title" href="#">Categories</a>
+                                                      <ul class="mega__item ">
                                               
                                                  <?php
                                     foreach($cat_arr as $list)
@@ -72,9 +79,54 @@ while($row=mysqli_fetch_assoc($cat_res))
                                         <li><a  class="mega__item" href="categories.php?id=<?php echo $list['Category_ID']?>" target="_blank" ><?php
                                         echo $list['Category_Name']?></a></li>
                                         <?php
+                                        if ($counter ==4) {
+                                            $counter =0;
+                                            break;
+                                        }else
+                                        {
+                                        $counter++;
+                                    }
                                     }
                                       ?>
                                                     </ul>
+                                                </li>
+                                                <!-- End Single Mega MEnu -->
+                                                <!-- Start Single Mega MEnu -->
+                                                <li><a class="mega__title" href="product-grid.html">Categories</a>
+                                                    <ul class="mega__item">
+                                                        
+
+                                                            <?php
+                                    foreach($cat_arr as $list)
+                                    { if ($counter ==5) {
+                                            
+                                        ?>
+                                        <li><a  class="mega__item" href="categories.php?id=<?php echo $list['Category_ID']?>" target="_blank" ><?php
+                                        echo $list['Category_Name']?></a></li>
+                                        <?php
+                                      
+                                        } else
+                                        {
+                                        $counter++;
+                                    }
+
+                                    }?>
+
+                                                        </ul>
+                                                </li>
+
+                                                <li><a class="mega__title" href="product-grid.html">ShopPages</a>
+                                                    <ul class="mega__item">
+                                                       <li><a href="#">About</a></li>
+                                                        <li><a href="#">Exchange Policies</a></li>
+                                                        <li><a href="#">Return Policies</a></li>
+                                                          <li><a href="#">Terms and Conditions</a></li> 
+                                                     </ul>
+                                                </li>
+                                                <!-- End Single Mega MEnu -->
+                                               
+                                            </ul>
+                                          
                                                 </li>
                                       
                                         <li><a href="contact.php">contact</a></li>
@@ -85,8 +137,8 @@ while($row=mysqli_fetch_assoc($cat_res))
                                     <nav id="mobile_dropdown">
                                         <ul>
                                             <li><a href="index.php">Home</a></li>
-                                            <li>
-
+                                              <li class="drop"><a href="#">Category</a>
+                                                    <ul class="dropdown">
                                           <?php
                                     foreach($cat_arr as $list)
                                     {
@@ -96,6 +148,7 @@ while($row=mysqli_fetch_assoc($cat_res))
                                         <?php
                                     }
                                       ?>
+                                  </ul>
                                   </li>
                                       
                                          
@@ -113,8 +166,10 @@ while($row=mysqli_fetch_assoc($cat_res))
                                         <a href="#"><i class="icon-user icons"></i></a>
                                     </div>
                                     <div class="htc__shopping__cart">
-                                        <a class="cart__menu" href="#"><i class="icon-handbag icons"></i></a>
-                                        <a href="#"><span class="htc__qua">0</span></a>
+                                        <a class="cart__menu" href="#"><i class="icon-handbag icons"></i>
+                                                <span class="htc__qua"><?php echo count($_SESSION['cart']); ?></span>
+                                        </a>
+                                       
                                     </div>
                                 </div>
                             </div>
