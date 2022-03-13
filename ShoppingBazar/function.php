@@ -4,7 +4,7 @@ function get_products($con,$type='')
 	$sql="SELECT * FROM `products`";
 	if ($type=='latest')
 	 {
-		$sql.="  where `product_Status`='1' order by product_id desc LIMIT 10";
+		$sql.="  where `product_Status`='1' order by product_id desc LIMIT 8";
 	}
 
 	
@@ -39,16 +39,14 @@ function get_products_cat($con,$cat_id='')
 }
 function get_cats_name($con,$catid='')
 {
-	$sql="SELECT products.*,category.* FROM products INNER JOIN category on products.product_id where products.product_id=$catid";
+	$sql="SELECT category.Category_Name FROM category WHERE category.Category_ID = (SELECT products.C_ID FROM products WHERE products.product_id = '$catid')";
 
-
-			// print_r($sql);exit();
 	$res= mysqli_query($con,$sql);
 
-	$data=array();
+	$data="";
 	while($row=mysqli_fetch_assoc($res))
 	{
-		$data[]=$row;
+		$data=$row['Category_Name'];
 
 	}
 	

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Jan 22, 2022 at 10:09 AM
+-- Generation Time: Feb 27, 2022 at 11:37 AM
 -- Server version: 5.7.33
 -- PHP Version: 7.4.19
 
@@ -66,7 +66,15 @@ CREATE TABLE `category` (
 
 INSERT INTO `category` (`Category_ID`, `Category_Name`, `Category_Status`) VALUES
 (17, 'Pcs', 1),
-(18, 'mob', 1);
+(18, 'mob', 1),
+(19, 'Laptop', 1),
+(20, 'Electronics', 1),
+(21, 'Toy Cars', 1),
+(24, 'Men\'s Clothing', 1),
+(25, 'Women\'s Cloths', 1),
+(26, 'kid\'s Cloths', 1),
+(27, 'Baby Cloths', 1),
+(28, 'Westren Suits', 1);
 
 -- --------------------------------------------------------
 
@@ -107,18 +115,35 @@ CREATE TABLE `products` (
   `product_bprice` bigint(20) NOT NULL,
   `product_sprice` bigint(20) NOT NULL,
   `product_instock` int(11) NOT NULL,
-  `product_Image` varchar(100) NOT NULL DEFAULT '../assets/ProductImages/Default.png',
+  `product_Image` varchar(100) NOT NULL DEFAULT 'assets/ProductImages/Default.png',
   `C_ID` int(11) NOT NULL,
-  `product_Status` int(11) NOT NULL DEFAULT '1'
+  `product_Status` int(11) NOT NULL DEFAULT '1',
+  `product_img_admin` varchar(400) NOT NULL DEFAULT '../assets/ProductImages/Default.png'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `products`
 --
 
-INSERT INTO `products` (`product_id`, `product_Name`, `product_Description`, `product_Color`, `product_bprice`, `product_sprice`, `product_instock`, `product_Image`, `C_ID`, `product_Status`) VALUES
-(2, 'reborn', 'Position an element at the bottom of the viewport, from edge to edge. Be sure you understand the ramifications of fixed position in your project; you may need to add additional CSS.', 'Black', 1400000, 1500000, 2, '../assets/ProductImages/Reborn_1.jpg', 17, 1),
-(3, 'Demo 33', 'demo  is an description', 'brown', 89, 100, 10, '../assets/ProductImages/pic1.PNG', 18, 0);
+INSERT INTO `products` (`product_id`, `product_Name`, `product_Description`, `product_Color`, `product_bprice`, `product_sprice`, `product_instock`, `product_Image`, `C_ID`, `product_Status`, `product_img_admin`) VALUES
+(2, 'reborn', 'Position an element at the bottom of the viewport, from edge to edge. Be sure you understand the ramifications of fixed position in your project; you may need to add additional CSS.', 'Black', 1400000, 1500000, 2, 'assets/ProductImages/Reborn_1.jpg', 21, 1, '../assets/ProductImages/Reborn_1.jpg'),
+(3, 'Demo 33', 'demo  is an description', 'brown', 89, 100, 10, 'assets/ProductImages/1.4.JPG', 18, 0, '../assets/ProductImages/1.4.JPG'),
+(4, 'demo pc', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum', 'Black', 120, 160, 12, 'assets/ProductImages/1.jfif', 17, 1, '../assets/ProductImages/1.jfif'),
+(5, 'Demo mobile', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum', 'Black', 1000, 1090, 1, 'assets/ProductImages/1.1.jfif', 18, 1, '../assets/ProductImages/1.1.jfif'),
+(6, 'Demo mobile 2', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum', 'Black', 1000, 1100, 1, 'assets/ProductImages/1.2.jfif', 18, 1, '../assets/ProductImages/1.2.jfif'),
+(7, 'Demo mobile 3', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum', 'brown', 1200, 1222, 12, 'assets/ProductImages/1.3.jfif', 18, 1, '../assets/ProductImages/1.3.jfif'),
+(8, 'Demo mobile', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum', 'abc', 1111, 1200, 111, 'assets/ProductImages/1.4.jfif', 18, 1, '../assets/ProductImages/1.4.jfif'),
+(9, 'demo laptop', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum', 'unkown', 1000, 1200, 8, 'assets/ProductImages/2.1.jfif', 19, 1, '../assets/ProductImages/2.1.jfif'),
+(10, 'demo laptop 2', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum', 'jkj', 1189, 1300, 111, 'assets/ProductImages/2.2.jfif', 19, 1, '../assets/ProductImages/2.2.jfif'),
+(11, 'Demo laptop 4', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum', 'white', 1110, 1200, 1, 'assets/ProductImages/2.3.jfif', 19, 0, '../assets/ProductImages/2.3.jfif'),
+(12, 'demo refregrator', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum', 'silver', 500, 600, 3, 'assets/ProductImages/3.1.jfif', 20, 1, '../assets/ProductImages/3.1.jfif'),
+(13, 'demo refregrator', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum', 'fghjk', 3456, 45678, 2345, 'assets/ProductImages/3.4.jfif', 20, 1, '../assets/ProductImages/3.4.jfif'),
+(14, 'Men Cloths', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum', 'brown', 120, 150, 122, 'assets/ProductImages/4.1.jfif', 24, 1, '../assets/ProductImages/4.1.jfif'),
+(15, 'Demo  product', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum', 'dfghjk', 565, 789, 4, 'assets/ProductImages/4.3.jfif', 24, 1, '../assets/ProductImages/4.3.jfif'),
+(16, 'womensuit', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum', 'red', 89, 100, 89, 'assets/ProductImages/5.2.jfif', 25, 1, '../assets/ProductImages/5.2.jfif'),
+(17, 'kids cloth', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum', 'demo', 123, 231, 1, 'assets/ProductImages/6.1.jfif', 26, 1, '../assets/ProductImages/6.1.jfif'),
+(18, 'A set  of two', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum', 'demo', 67, 67, 67, 'assets/ProductImages/7.4.jfif', 27, 1, '../assets/ProductImages/7.4.jfif'),
+(19, 'Mens suit', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum', 'silver', 70, 100, 1, 'assets/ProductImages/8.3.jfif', 28, 1, '../assets/ProductImages/8.3.jfif');
 
 --
 -- Indexes for dumped tables
@@ -165,7 +190,7 @@ ALTER TABLE `admin`
 -- AUTO_INCREMENT for table `category`
 --
 ALTER TABLE `category`
-  MODIFY `Category_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `Category_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
 
 --
 -- AUTO_INCREMENT for table `manager`
@@ -177,7 +202,7 @@ ALTER TABLE `manager`
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
-  MODIFY `product_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `product_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- Constraints for dumped tables
