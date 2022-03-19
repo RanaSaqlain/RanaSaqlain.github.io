@@ -1,57 +1,58 @@
 # RanaSaqlain.github.io
 Hello ,Good Morning !
-Shopping Bazar
+ <h1>Shopping Bazar </h1>
 
 ( Ecommerce Web Application )
 
-Get in touch with team  ->   Rana Saqlain [ msaqlain6666@gmail.com ]
- 
-**Contents
-**About**	1
-**What do Project have**	1
-**Which Programing  Languages  been used**	2
-**How to Install it on your Local Serve**r	2
-**
+ <h3> Get in touch with team  ->   Rana Saqlain [ msaqlain6666@gmail.com ] </h3>
+ <div>
+ <strong> Contents   </strong> <br/>
+<strong> About  -	1 </strong> <br/>
+<strong> What do Project have - 1 </strong>  <br/>
+<strong> Which Programing  Languages  been used -	2 </strong>  <br/>
+<strong> How to Install it on your Local Server -	2  </strong>  <br/>
+	</div>
 
-**About**
-	Shopping Bazar is an Ecommerce web Application , A complete solution for  selling products online having the sales report and  product inventory system , along with those  having   secure and safe payment gateways for online transactions.
-
-**What do Project have**
+<h3> About  -	1 </h3> <br/>
+	
+<p>	Shopping Bazar is an Ecommerce web Application , A complete solution for  selling products online having the sales report and  product inventory system , along with those  having   secure and safe payment gateways for online transactions.
+	</p>
+<h3> What do Project have - 1 </h3>  <br/>
 
 	Fully Responsive Designs  for all devices.  Good and User Friendly Designs are been used. Custom Designs embedded with rich Templates.
-•	Admin Panels
-o	CEO , Managers , Customers.
+•	Admin Panels     <br/>
+o	CEO , Managers , Customers.   <br/>
 
-•	 Product inventory  & Managing   categories
+•	 Product inventory  & Managing   categories   <br/>
 
-o	Adding Products  , categories
-o	Editing Existing  products , categories 
-o	Deleting products , categories
-o	Listing Products , categories
-	Extra feature   Active or Inactive Status  of the products or categories , if it is out of stock make it unavailable for the moment , or admin can make it inactive for any reason.
-•	 Option to add new admins / Manager
-The Project have option to add  new  admins and manager in case of need. 
-•	 Work Time of Manager
- The project have  feature of the working  history of the manager been hired.
+o	Adding Products  , categories   <br/>
+o	Editing Existing  products , categories   <br/>
+o	Deleting products , categories  <br/>
+o	Listing Products , categories  <br/>
+	Extra feature   Active or Inactive Status  of the products or categories , if it is out of stock make it unavailable for the moment , or admin can make it inactive for any reason.   <br/>
+•	 Option to add new admins / Manager  <br/>
+The Project have option to add  new  admins and manager in case of need.   <br/>
+•	 Work Time of Manager  <br/>
+ The project have  feature of the working  history of the manager been hired.  <br/>
 
-•	Shop Page 
-The Project have a shop page .
-•	 Product Search feature , Categories select filters
-•	Products reviews and ratings.
-•	Shopping Cart
-•	Checkout page 
-•	Payment options  
-o	Online  	through bank cards . using Stripe , PayPal 
-o	Offline , Cash on delivery 
+•	Shop Page    <br/>
+The Project have a shop page .  <br/>
+•	 Product Search feature , Categories select filters  <br/>
+•	Products reviews and ratings.  <br/> 
+•	Shopping Cart   <br/> 
+•	Checkout page   <br/> 
+•	Payment options    <br/> 
+o	Online  	through bank cards . using Stripe , PayPal   <br/> 
+o	Offline , Cash on delivery     <br/> 
 
-Which Programing  Languages  been used
+<h3> Which Programing  Languages  been used </h3>
 
-•	 Bootstrap, HTML , CSS , JavaScript , JQuery
-•	AJAX , PHP  
-•	MySqli 
+•	 Bootstrap, HTML , CSS , JavaScript , JQuery   <br/> 
+•	AJAX , PHP    <br/> 
+•	MySqli   <br/> 
 
 <br/>
-**How to Install it on your Local Server**
+<h2>How to Install it on your Local Server </h2>
 
 •	First  make  sure  you have   xamp or wamp at your machine . <br/>
 •	In the the htdocs of the xamp .<br/>
