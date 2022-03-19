@@ -48,17 +48,21 @@ Which Programing  Languages  been used
 
 •	 Bootstrap, HTML , CSS , JavaScript , JQuery
 •	AJAX , PHP  
-•	MySqli
+•	MySqli 
 
-
+<br/>
 **How to Install it on your Local Server**
 
-•	First  make  sure  you have   xamp or wamp at your machine . 
-•	In the the htdocs of the xamp .
-•	Download the Shopping Bazar Folder from the Repository -> https://github.com/RanaSaqlain/RanaSaqlain.github.io
-•	Place the folder  in your htdocs
-•	Open your Phpmyadmin 
-•	 In Database folder  there is the  database of the Project  , must be named  with ShoppingBazar (1).sql  db .    create an database name of ShoppingBazar  and import the The final db at your machine.
-•	Now  type Url Localhost/ folder path.  Admin Password msaqlain6666@gmail.com , 1234
+•	First  make  sure  you have   xamp or wamp at your machine . <br/>
+•	In the the htdocs of the xamp .<br/>
+•	Download the Shopping Bazar Folder from the Repository -> https://github.com/RanaSaqlain/RanaSaqlain.github.io <br/>
+•	Place the folder  in your htdocs <br/>
+•	Open your Phpmyadmin  <br/>
+•	 In Database folder  there is the  database of the Project  , must be named  with ShoppingBazar (1).sql  db .    create an database name of ShoppingBazar  and import the The ShoppingBazar (1).sql at your machine. <br/>
+•	Now  type Url Localhost/ folder path.  Admin Password msaqlain6666@gmail.com , 1234 <br/>
+        localhost/ShoppingBazar/   <--- For Shop Page  <br/>
+	Localhost/ShoppingBazar/CeoPanel/   <--- for Ceo Panel   {admin panel and put the given admin creditentials} <br/>
+	localhost/ShoppingBazar/ManagerPanel/     <--- for Manager Panel  {creditential =  email = test@test.com  , pasword = test }   <br/>
+
 
 Do not use it for Commercial Purposes.
