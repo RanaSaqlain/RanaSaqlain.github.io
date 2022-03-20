@@ -1,7 +1,7 @@
 <?php
-
-require('db.php');
 require('function.php');
+require('db.php');
+
 $cat_res=mysqli_query($con,"select * from category where Category_Status=1");
 $cat_arr=array();
 while($row=mysqli_fetch_assoc($cat_res))
@@ -25,6 +25,7 @@ $counter = 0;
     <!-- All css files are included here. -->
     <!-- Bootstrap fremwork main css -->
     <link rel="stylesheet" href="assets/ShopPage/css/bootstrap.min.css">
+     
     <!-- Owl Carousel min css -->
     <link rel="stylesheet" href="assets/ShopPage/css/owl.carousel.min.css">
     <link rel="stylesheet" href="assets/ShopPage/css/owl.theme.default.min.css">
@@ -43,7 +44,8 @@ $counter = 0;
     <!-- Modernizr JS -->
     <script src="assets/ShopPage/js/vendor/modernizr-3.5.0.min.js"></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-
+        <!-- Stripe JavaScript library -->
+       
 </head>
 
 <body>

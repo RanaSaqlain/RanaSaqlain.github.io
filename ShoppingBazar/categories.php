@@ -1,8 +1,11 @@
 <?php 
+ $srched = array();
+ 
 require_once('top.php');
 require_once 'db.php';
 require_once "function.php";
-    $srched = array();
+
+
 $cat_id=mysqli_real_escape_string($con,$_GET['id']);
 
 
@@ -14,6 +17,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
       $srched=  get_searched_product($con , $srch);
             
     }
+    if(isset($_POST['addtocart']))
+    {
+       $id = $_POST['pid'];
+        $response = addtocart($con,$id);
+     if ($response != null) {
+         echo '<script type="text/javascript">
+    swal("Shopping Bazar!", "'.$response.'");
+</script>';}
+
+    }
+
 }
 
 ?>
@@ -58,7 +72,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         <div class="col-xs-12">
                             <div class="bradcaump__inner">
                                 <nav class="bradcaump-inner">
-                                  <a class="breadcrumb-item" href="index.html">Home</a>
+                                  <a class="breadcrumb-item" href="index.php">Home</a>
                                   <span class="brd-separetor"><i class="zmdi zmdi-chevron-right"></i></span>
                                   <span class="breadcrumb-item active">Products</span>
                                 </nav>
@@ -73,7 +87,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <section class="htc__product__grid bg__white ptb-100">
             <div class="container">
                 <div class="row">
-                    <div class="col-lg-9  col-md-9 col-sm-12 col-xs-12">
+                    <div class="col-12">
                         <div class="htc__product__rightidebar">
                             <div class="htc__grid__top">
                                 <div class="htc__select__option">
@@ -120,7 +134,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                         <ul class="product__action">
                                             <li><a href="wishlist.php"><i class="icon-heart icons"></i></a></li>
 
-                                            <li><a href="cart.php"><i class="icon-handbag icons"></i></a></li>
+                                            <li>
+                                                <form action="" method="post" >
+                                                    <input type="hidden" name="pid" value="<?php echo $list['product_id'] ?>">
+                                                    <button type="submit" name="addtocart" >
+                                                       <a><i class="icon-handbag icons"></i></a></button>
+                                                </form>
+                                                </li>
 
                                             <li><a href="#"><i class="icon-shuffle icons"></i></a></li>
                                         </ul>
@@ -170,7 +190,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                                         </ul>
                                                         <p><?php echo $list['product_Description'] ?></p>
                                                         <div class="fr__list__btn">
-                                                            <a class="fr__btn" href="cart.html">Add To Cart</a>
+                                                           <form action="" method="post" >
+                                                    <input type="hidden" name="pid" value="<?php echo $list['product_id'] ?>">
+                                                    <button type="submit" name="addtocart" >
+                                                        <a class="fr__btn">Add To Cart</a></button>
+                                                </form>
                                                         </div>
                                                     </div>
                                                 </div>

@@ -30,14 +30,14 @@
                         <div class="shp__single__product">
                             <div class="shp__pro__thumb">
                                 <a href="#">
-                                    <img src="<?php    echo $value['image']; ?>" alt="product images">
+                                    <img src="<?php if(isset($value['image'])){echo $value['image'];} ?>" alt="product images">
                                 </a>
                             </div>
                             <div class="shp__pro__details">
-                                <h2><a href="product-details.php"><?php echo $value['name']; ?></a></h2>
+                                <h2><a href="product-details.php"><?php  if(isset($value['name'])){echo $value['name'];} ?></a></h2>
                                
-                                <span class="quantity">QTY:<?php echo $value['quantity']; ?></span>
-                                <span class="shp__price">$ <?php     echo ($value['price'] * $value['quantity'] ); ?> </span>
+                                <span class="quantity">QTY:<?php  if(isset($value['quantity'])){echo $value['quantity'];} ?></span>
+                                <span class="shp__price">$ <?php    if(isset($value['quantity'])){ echo ($value['price'] * $value['quantity'] );} ?> </span>
                             </div>
                             <div class="remove__btn">
                                 

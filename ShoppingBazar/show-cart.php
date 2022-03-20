@@ -1,10 +1,8 @@
 <?php
-if (session_id() =="") {
-     session_start();
-     }
+
       $srched = array();
 require "top.php";
-require_once "function.php";
+include_once("function.php");
 require 'db.php';
 getcarttotal();
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -120,9 +118,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                     <tbody>
                                         
                                         <?php if (isset($_SESSION['cart'])) {
+                                           
                                         foreach ($_SESSION['cart'] as $key => $value) {
                                                 if ($value != null) {
-                                                                               
+                                                                           
                                         ?>  
                                         <tr>
                                             <td class="product-thumbnail"><a href="#"><img src="<?php echo $value['image']; ?>" alt="product img" /></a></td>
@@ -132,7 +131,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                             <td class="product-price"><span class="amount">$<?php     echo $value['price'] ; ?></span></td>
                                             <td class="product-quantity">
                                                 <form action="" method="post">
-                                                    <input type="hidden" name="iup" value="<?php echo $value['id'] ?>">
+                                                    <input type="hidden" name="iup" value="<?php 
+                                                    echo $value["id"]; ?>">
                                                 <button type="submit" name="minus"><a> &nbsp<strong>-&nbsp</strong> </a></button> <input type="number" value="<?php     echo  $value['quantity']; ?>" readonly="" />
                                                 <button type="submit" name="add"><strong>+</strong></button>
                                                 </form>
@@ -162,7 +162,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                             <a href="#"> Subtotal : $ <?php  if (isset($_SESSION['subtotal'])) {
                             echo $_SESSION['subtotal'];
                         }  ?></a>
-                                            <a href="#">checkout</a>
+                                            <a href="checkout.php">checkout</a>
                                         </div>
                                     </div>
                                 </div>

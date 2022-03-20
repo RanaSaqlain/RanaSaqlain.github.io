@@ -1,5 +1,8 @@
 /*-----------------------------------------------------------------------------------
 
+  Template Name: Asbab eCommerce HTML5 Template.
+  Description: Asbab is a unique website template designed in HTML with a simple & beautiful look.
+
 -----------------------------------------------------------------------------------
   
   CSS INDEX
@@ -380,9 +383,10 @@
     font-size: 18px;
     transition: all 0.4s ease 0s;
 }
-.product__action li a:hover {
+.product__action  li a:hover  {
     background: #c43b68 none repeat scroll 0 0;
 }
+
 .product__action li a:hover i {
     color: #fff;
 }

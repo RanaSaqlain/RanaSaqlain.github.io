@@ -6,9 +6,14 @@ if (session_id() =="") {
 			  $_SESSION['subtotal'] =  0;
 
 			  	if (isset($_COOKIE["cart"])) {
-			  		$cart = json_decode($_COOKIE["cart"]);
+						unset($_SESSION['cart']);
+			  		$cart = json_decode($_COOKIE["cart"],true);
 			  		if ($cart != null) {
-			  		$_SESSION['cart'][] = $cart;
+			  				foreach ($cart as $key => $value) {
+
+			  				$_SESSION['cart'][$value['id']] = $value;
+			  				}
+			  		
 			  		}
 			  		
 			  	}
@@ -17,7 +22,8 @@ if (session_id() =="") {
 		
 
  }
-
+	include_once("db.php");
+getcarttotal();
 function get_products($con,$type='')
 {
 	$sql="SELECT * FROM `products`";
@@ -133,6 +139,7 @@ function get_searched_product($con,$srch)
                      "name"=>$get_product["0"]["product_Name"],
                     "quantity"=>1,
                     "price"=>$get_product["0"]["product_sprice"],
+                    "bprice"=>$get_product["0"]["product_bprice"],
 
               
           ];
@@ -163,11 +170,14 @@ function  getcarttotal()
 {
 
 	$_SESSION['subtotal'] = null;
+	$_SESSION['buypricetotal'] = null;
 	 if (isset($_SESSION['cart'])) {
 
      foreach ($_SESSION['cart'] as $key => $value) {
+
      			if($value != null )
      			{
+     					$_SESSION['buypricetotal']  +=$value['bprice'] * $value['quantity'];
      				$_SESSION['subtotal']  +=$value['price'] * $value['quantity'];
      			}
      
@@ -217,14 +227,136 @@ if ($_POST['opp']=="cookie") {
    		if (isset($_SESSION["cart"])) {
    					if($_SESSION["cart"] != null)
    					{
-   						$cookie_array[] = $_SESSION['cart'];
-   			setcookie("cart", json_encode($cookie_array), time() + (86400 * 60), "/");
+   						$cookie_array = $_SESSION['cart'];
+   						if ($_COOKIE["cart"] != null) {
+
+			  					setcookie("cart","",time() -36000, "/" );	
+   						 
+   					
+   					}	
+   			  setcookie("cart", json_encode($cookie_array), time() + (86400 * 30), "/");
    					}
    			
    		}
 
 
-}}
+}
+if ($_POST['opp']=="checkout") {
+if ($_SESSION['cart'] == null) {
+    echo json_encode('index.php');
+}else{
+ 	$order_id=null;
+ 	$strie_id="0000";
+ 	$pay_method="COD";
+ 		$first_Name=mysqli_real_escape_string($con,$_POST["firstname"]);
+ 		$lastname=mysqli_real_escape_string($con,$_POST["lastname"]);
+ 		$streetno=mysqli_real_escape_string($con,$_POST["streetno"]);
+ 		$houseno=mysqli_real_escape_string($con,$_POST["houseno"]);
+ 		$city=mysqli_real_escape_string($con,$_POST["city"]);
+ 		$zip=mysqli_real_escape_string($con,$_POST["zip"]);
+ 		$email=mysqli_real_escape_string($con,$_POST["email"]);
+ 		$phone=mysqli_real_escape_string($con,$_POST["phone"]);
+ 			$amount = $_SESSION['subtotal'];
+ 			$bprice=  $_SESSION['buypricetotal'];
+ 			$profit =  $amount - $bprice;
+
+ 				if (!empty($_POST["paypal"])) {
+ 					$pay_method = "Paypal";
+ 				}
+
+ 			if(!empty($_POST['stripeToken'])){
+ 				$token  = $_POST['stripeToken'];
+
+ 		require_once('stripe-php/init.php');
+    
+    //set api key
+    $stripe = array(
+      "secret_key"      => "sk_test_51JOGznLJmPxt11F1KQ9Pd7FUJEh7jcP4xDDyc5cDT4R928gz1u3NTY4WMi2aNtQKZiL7e3VmjHT0oOm8VRtZie3b00TALrQ0AN",
+      "publishable_key" => "pk_test_51JOGznLJmPxt11F1RwQ1Nletc5hY6uuED40cfdyuqXkBfHaETq3zYFlol8IiDJZgVMF1pHnLNvNwYESfquK2pC3M00N34KZZbC"
+    );
+\Stripe\Stripe::setApiKey($stripe['secret_key']);
+    
+    //add customer to stripe
+    $customer = \Stripe\Customer::create(array(
+        'email' => $email,
+        'source'  => $token
+    ));
+   
+    //charge a credit or a debit card
+    $charge = \Stripe\Charge::create(array(
+        'customer' => $customer->id,
+        'amount'   => $amount*100,
+        'currency' => "usd",
+        'description' => 'Shopping Bazar have deducted this amount from your bank',
+        
+    ));
+ $chargeJson = $charge->jsonSerialize();
+ if($chargeJson['amount_refunded'] == 0 && empty($chargeJson['failure_code']) && $chargeJson['paid'] == 1 && $chargeJson['captured'] == 1){
+ 	$strie_id=$customer->id;
+ 		$pay_method ="Stripe";
+ }
+
+ 			}
+			$sql = "INSERT INTO `customer`( `Email`,`Stripe_id`, `First_Name`, `Last_Name`, `Street`, `House`, `City`, `Zipcode`, `Phone`) VALUES ('$email','$strie_id','$first_Name','$lastname','$streetno','$houseno','$city','$zip','$phone')";
+			$result = mysqli_query($con,$sql);
+			if ($result) {
+					$customer_id =  mysqli_insert_id($con);
+						$sql = "INSERT INTO `orders`(`Customer_id`, `Amount`, `Payment_method`, `order_Status`) VALUES ('$customer_id','$amount','$pay_method','1')";
+						$res = mysqli_query($con,$sql);
+			if ($res) {
+				$order_id =  mysqli_insert_id($con);
+				$sql = "INSERT INTO `sales`( `order_id`, `Profit`, `sale_status`) VALUES ('$order_id','$profit','1')";
+				$response = mysqli_query($con,$sql);
+				if($response)
+				{
+					$sale_id =  mysqli_insert_id($con);
+						foreach ($_SESSION['cart'] as $key => $value) {
+
+     			if($value != null )
+     			{
+
+     					  $id = $value["id"];
+     					  $image =$value["image"];
+      					$name = $value["name"];
+      					$quantity = $value["quantity"];
+      					$price = $value["price"] * $value["quantity"];
+      					$bprice = $value["bprice"] * $value["quantity"];
+      					$p = $price - $bprice;
+     				$sql = "INSERT INTO `soldProducts`(`product_id`, `p_name`, `P_image`, `sold_quantity`, `soldprice`, `buyprice`, `profit`, `Customer_id`, `order_id`, `sale_id`) VALUES ('$id','$name','$image','$quantity','$price','$bprice','$p','$customer_id','$order_id','$sale_id')";
+
+     						mysqli_query($con,$sql);
+     						$sql = "SELECT * FROM products WHERE product_id = '$id'";
+									$resul = mysqli_query($con,$sql);
+									if ($resul) {
+										
+										  $row = mysqli_fetch_assoc($resul);
+										 
+										   $qunatity = $row['product_instock'];
+										   
+										  $newquantity = $qunatity - $quantity;
+										  
+										    $sql = "UPDATE `products` SET `product_instock`='$newquantity' WHERE product_id ='$id'";
+										    mysqli_query($con,$sql);
+									     							
+									     						
+									     			}
+     		}
+
+				}
+
+			}
+			}
+			unset($_SESSION['cart']);
+			setcookie("cart","",time() -36000, "/" );	
+
+			echo json_encode("Thankyou.php?id=".$order_id);
+
+}
+}
+}
+}
+
+
 
 }
 ?>
