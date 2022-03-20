@@ -1,3 +1,19 @@
+<?php
+require_once "loader.php";
+require_once "../db.php";
+require_once "auth_session.php";
+require_once "function.php";
+ $sql="SELECT orders.*,customer.* FROM orders INNER JOIN customer ON orders.Customer_id=id";
+ 
+    $res= mysqli_query($con,$sql);
+     while($row=mysqli_fetch_assoc($res))
+    {
+$data[]=$row;
+
+}
+ 
+   
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -40,65 +56,50 @@ include("topnav.php");
                           
                             <div class="table-responsive">
                                 <table class="table no-wrap">
+    
                                     <thead>
                                         <tr>
-                                            <th class="border-top-0">#</th>
-                                            <th class="border-top-0">Name</th>
+                                            <th class="border-top-0">Order ID</th>
+                                            <th class="border-top-0">Customer Name</th>
                                             <th class="border-top-0">Status</th>
                                             <th class="border-top-0">Date</th>
                                             <th class="border-top-0">Price</th>
                                         </tr>
                                     </thead>
+
+                                     <?php
+                                    
+                                   foreach($data as $list)
+                                    {
+                                             
+
+                                         ?>
                                     <tbody>
                                         <tr>
-                                            <td>1</td>
-                                            <td class="txt-oflo">Elite admin</td>
-                                            <td>SALE</td>
-                                            <td class="txt-oflo">April 18, 2021</td>
-                                            <td><span class="text-success">$24</span></td>
+                                            <td><?php
+                                        echo $list['order_id']?></td>
+                                         
+                                        
+                        
+                                            <td class="txt-oflo">
+                                       <?php
+                                      
+                                            
+                                        echo $list['First_Name']?>
+                                            
+                                        </td>
+
+                                   
+
+                                            <td><?php
+                                        echo $list['order_Status']?></td>
+                                            <td class="txt-oflo"><?php
+                                        echo $list['orderTime']?></td>
+                                            <td><span class="text-success"><?php
+                                        echo $list['Amount']?></span></td>
                                         </tr>
-                                        <tr>
-                                            <td>2</td>
-                                            <td class="txt-oflo">Real Homes WP Theme</td>
-                                            <td>EXTENDED</td>
-                                            <td class="txt-oflo">April 19, 2021</td>
-                                            <td><span class="text-info">$1250</span></td>
-                                        </tr>
-                                        <tr>
-                                            <td>3</td>
-                                            <td class="txt-oflo">Ample Admin</td>
-                                            <td>EXTENDED</td>
-                                            <td class="txt-oflo">April 19, 2021</td>
-                                            <td><span class="text-info">$1250</span></td>
-                                        </tr>
-                                        <tr>
-                                            <td>4</td>
-                                            <td class="txt-oflo">Medical Pro WP Theme</td>
-                                            <td>TAX</td>
-                                            <td class="txt-oflo">April 20, 2021</td>
-                                            <td><span class="text-danger">-$24</span></td>
-                                        </tr>
-                                        <tr>
-                                            <td>5</td>
-                                            <td class="txt-oflo">Hosting press html</td>
-                                            <td>SALE</td>
-                                            <td class="txt-oflo">April 21, 2021</td>
-                                            <td><span class="text-success">$24</span></td>
-                                        </tr>
-                                        <tr>
-                                            <td>6</td>
-                                            <td class="txt-oflo">Digital Agency PSD</td>
-                                            <td>SALE</td>
-                                            <td class="txt-oflo">April 23, 2021</td>
-                                            <td><span class="text-danger">-$14</span></td>
-                                        </tr>
-                                        <tr>
-                                            <td>7</td>
-                                            <td class="txt-oflo">Helping Hands WP Theme</td>
-                                            <td>MEMBER</td>
-                                            <td class="txt-oflo">April 22, 2021</td>
-                                            <td><span class="text-success">$64</span></td>
-                                        </tr>
+                                    <?php } ?>
+                                     
                                     </tbody>
                                 </table>
                             </div>

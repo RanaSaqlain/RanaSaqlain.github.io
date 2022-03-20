@@ -5,9 +5,11 @@ if($_SERVER['REQUEST_METHOD']=="POST")
 {
 	if($_POST['opp']=="add")
 	{
-			$catname = $_POST['cat-name'];
+			$catname =  mysqli_real_escape_string($con,$_POST['cat-name']);
 			$register = "INSERT INTO `Category`( `Category_Name`) VALUES ('$catname')";
+			
 			 $result = $con->query($register);
+			
 			 if(!$result)
 			 {
 

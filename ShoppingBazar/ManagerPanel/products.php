@@ -1,6 +1,6 @@
 <?php
 require 'auth_session.php';
-
+require_once "loader.php";
 ?>
 <!DOCTYPE html>
 <html>
@@ -251,7 +251,7 @@ $("body").on("click",".editbtn",function(){
     data: {opp:"fetcheditdata",id:cid,},
     success:function(response){
       $('#pName').val(response["product_Name"]);
-      $('.pimage').attr("src",response["product_Image"]);
+      $('.pimage').attr("src",response["product_img_admin"]);
       $('#pdes').text(response["product_Description"]);
       $('#Category option[value='+response["C_ID"]+'] ').attr('selected', 'selected');
       $('#pcolor').val(response["product_Color"]);

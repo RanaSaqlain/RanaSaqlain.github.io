@@ -5,6 +5,7 @@ $filecheck1 =false;
 $msg="";
   require_once "../db.php";
     require_once "auth_session.php";
+    require_once "loader.php";
    if (isset($_POST['submit'])) 
    {
     $fname=mysqli_real_escape_string($con,$_POST["fname"]);

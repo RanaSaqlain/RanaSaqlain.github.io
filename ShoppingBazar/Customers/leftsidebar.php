@@ -1,4 +1,4 @@
-
+<?php require_once "loader.php"; ?>
  <nav class="sidenav navbar navbar-vertical  fixed-left  navbar-expand-xs navbar-light "
  id="sidenav-main" >
     <div class="scrollbar-inner"  >

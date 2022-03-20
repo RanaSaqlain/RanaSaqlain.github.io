@@ -1,5 +1,6 @@
  <?php
 require_once"auth_session.php";
+require_once "loader.php";
 ?>
 
  <nav class="sidenav navbar navbar-vertical  fixed-left  navbar-expand-xs navbar-light bg-white" id="sidenav-main" >

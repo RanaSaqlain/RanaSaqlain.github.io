@@ -1,5 +1,6 @@
 <?php
 require_once "auth_session.php";
+require_once "loader.php";
 ?>
 
 <nav class="navbar navbar-top navbar-expand navbar-dark bg-primary border-bottom col-12">

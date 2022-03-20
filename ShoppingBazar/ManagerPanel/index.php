@@ -2,6 +2,7 @@
 require_once "../db.php";
 
 require"auth_session.php";
+require_once "loader.php";
 ?>
 <!DOCTYPE html>
 <html>
