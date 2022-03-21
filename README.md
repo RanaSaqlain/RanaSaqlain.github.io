@@ -61,7 +61,7 @@ o	Offline , Cash on delivery     <br/>
 •	Place the folder  in your htdocs in xamp /www in Laragon <br/>
 •	Open your Phpmyadmin  <br/>
 •	 In Database folder  there is the  database of the Project  , must be named  with ShoppingBazar (1).sql  db .    create an database name of ShoppingBazar  and import the The ShoppingBazar (1).sql at your machine. <br/>
-•	Now  type Url Localhost/ folder path.  Admin Password msaqlain6666@gmail.com , 1234 <br/>
+•	Now  type Url Localhost/ folder path.  Admin Password msaqlain6666@gmail.com , 12345 <br/>
         localhost/ShoppingBazar/   <--- For Shop Page  <br/>
 	Localhost/ShoppingBazar/CeoPanel/   <--- for Ceo Panel   {admin panel and put the given admin creditentials} <br/>
 	localhost/ShoppingBazar/ManagerPanel/     <--- for Manager Panel  {creditential =  email = test@test.com  , pasword = test }   <br/>
