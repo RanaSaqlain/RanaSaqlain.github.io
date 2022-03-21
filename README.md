@@ -57,7 +57,8 @@ o	Offline , Cash on delivery     <br/>
 •	First  make  sure  you have   xamp or wamp at your machine . <br/>
 •	In the the htdocs of the xamp .<br/>
 •	Download the Shopping Bazar Folder from the Repository -> https://github.com/RanaSaqlain/RanaSaqlain.github.io <br/>
-•	Place the folder  in your htdocs <br/>
+•	 you will have a Zip file  . Extract the Zip file  you  will get an folder with name of RanaSaqlain.github.io-main   in that folder there will be a folder named as  Shopping  Bazar  Copy this  Folder. <br/>
+•	Place the folder  in your htdocs in xamp /www in Laragon <br/>
 •	Open your Phpmyadmin  <br/>
 •	 In Database folder  there is the  database of the Project  , must be named  with ShoppingBazar (1).sql  db .    create an database name of ShoppingBazar  and import the The ShoppingBazar (1).sql at your machine. <br/>
 •	Now  type Url Localhost/ folder path.  Admin Password msaqlain6666@gmail.com , 1234 <br/>
