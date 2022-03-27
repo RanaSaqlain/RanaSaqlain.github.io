@@ -2,7 +2,7 @@
 require_once "loader.php";
 require_once "../db.php";
 require_once "auth_session.php";
-require_once "function.php";
+
  $sql="SELECT orders.*,customer.* FROM orders INNER JOIN customer ON orders.Customer_id=id";
  
     $res= mysqli_query($con,$sql);
@@ -33,6 +33,11 @@ $data[]=$row;
   <!-- Argon CSS -->
   <link rel="stylesheet" href="../assets/css/argon.css?v=1.2.0" type="text/css">
      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
+      <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.25/css/jquery.dataTables.min.css">
+    <script
+  src="https://code.jquery.com/jquery-3.6.0.js"
+  integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
+  crossorigin="anonymous"></script>
 
 </head>
 <body style="width:98.9%;">
@@ -55,7 +60,7 @@ include("topnav.php");
                         <div class="white-box">
                           
                             <div class="table-responsive">
-                                <table class="table no-wrap">
+                                <table class="table no-wrap" id="myTable">
     
                                     <thead>
                                         <tr>
@@ -67,14 +72,15 @@ include("topnav.php");
                                         </tr>
                                     </thead>
 
-                                     <?php
+                                    
+                                    <tbody>
+                                         <?php
                                     
                                    foreach($data as $list)
                                     {
                                              
 
                                          ?>
-                                    <tbody>
                                         <tr>
                                             <td><?php
                                         echo $list['order_id']?></td>
@@ -111,5 +117,11 @@ include("topnav.php");
 
     ?>
 </div>
+  <script type="text/javascript" src="//cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready( function () {
+    $('#myTable').DataTable();
+} );
+    </script>
 </body>
 </html>

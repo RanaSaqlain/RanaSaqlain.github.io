@@ -72,7 +72,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                         <h2>Collection 2021</h2>
                                         <h1>Welcome</h1>
                                         <div class="cr__btn">
-                                            <a href="cart.php">Shop Now</a>
+                                            <a href="cart">Shop Now</a>
                                         </div>
                                     </div>
                                 </div>
@@ -96,7 +96,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                         <h2>Collection 2021</h2>
                                         <h1>Welcome</h1>
                                         <div class="cr__btn">
-                                            <a href="cart.php">Shop Now</a>
+                                            <a href="cart">Shop Now</a>
                                         </div>
                                     </div>
                                 </div>
@@ -138,16 +138,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                             <div class="col-md-4 col-lg-3 col-sm-6 col-xs-12">
                                 <div class="category">
                                     <div class="ht__cat__thumb">
-                                        <a href="ProductDetail.php?id=<?php echo $list['product_id'] ?>">
+                                        <a href="ProductDetail?id=<?php echo $list['product_id'] ?>">
                                             <img src="<?php echo $list['product_Image'] ?>">
                                         </a>
                                     </div>
                                     <div class="fr__hover__info">
                                         <ul class="product__action">
-                                            <li><a href="wishlist.php"><i class="icon-heart icons"></i></a></li>
+                                            <li><a href="wishlist"><i class="icon-heart icons"></i></a></li>
 
                                             <li>
-                                                <form action="index.php" method="post" >
+                                                <form action="index" method="post" >
                                                     <input type="hidden" name="pid" value="<?php echo $list['product_id'] ?>">
                                                     <button type="submit" name="addtocart" >
                                                         <a><i class="icon-handbag icons"></i></a></button>
@@ -159,7 +159,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                         </ul>
                                     </div>
                                     <div class="fr__product__inner">
-                                        <h3><a href="product-details.php"><?php echo $list['product_Name'] ?></a></h3>
+                                        <h3><a href="product-details"><?php echo $list['product_Name'] ?></a></h3>
                                         <ul class="fr__pro__prize">
                                         
                                             <li><?php echo $list['product_sprice']."$" ?></li>

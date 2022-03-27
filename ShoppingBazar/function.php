@@ -1,4 +1,5 @@
 <?php
+ $EmailCheck=false;  
 if (session_id() =="") {
      session_start();
       if(!isset($_SESSION['cart'])){
@@ -76,6 +77,19 @@ function get_cats_name($con,$catid='')
 	}
 	
 	return $data;
+}
+function getcustname($con,$cusname='')
+{
+	$sql="SELECT customer.First_Name FROM customer WHERE customer.id = (SELECT orders.Customer_id FROM orders WHERE orders.order_id ='$cusname')";
+	$res= mysqli_query($con,$sql);
+
+	$data="";
+	while($row=mysqli_fetch_assoc($res))
+	{
+		$data=$row['First_Name'];
+		print_r($data);
+
+	}
 }
 
 function get_products_detail($con,$product_id)
@@ -297,11 +311,25 @@ if ($_SESSION['cart'] == null) {
  }
 
  			}
-			$sql = "INSERT INTO `customer`( `Email`,`Stripe_id`, `First_Name`, `Last_Name`, `Street`, `House`, `City`, `Zipcode`, `Phone`) VALUES ('$email','$strie_id','$first_Name','$lastname','$streetno','$houseno','$city','$zip','$phone')";
-			$result = mysqli_query($con,$sql);
+ 			$checkemail="SELECT * FROM `customer` WHERE Email='$email'";
+                  $result1=mysqli_query($con,$checkemail);
+                  $count=mysqli_num_rows($result1);
+                  if($count>0)
+                  {
+                   echo '<script type="text/javascript">
+    swal("Shopping Bazar!", "Email Already Exists");
+</script>';    
+                  }
+                  else
+                  {
+                  	$sql = "INSERT INTO `customer`( `Email`,`Stripe_id`, `First_Name`, `Last_Name`, `Street`, `House`, `City`, `Zipcode`, `Phone`) VALUES ('$email','$strie_id','$first_Name','$lastname','$streetno','$houseno','$city','$zip','$phone')";
+			$result = mysqli_query($con,$sql);	
+                  }
+		
 			if ($result) {
 					$customer_id =  mysqli_insert_id($con);
-						$sql = "INSERT INTO `orders`(`Customer_id`, `Amount`, `Payment_method`, `order_Status`) VALUES ('$customer_id','$amount','$pay_method','1')";
+					 $orderTime=date("M-Y-D");
+						$sql = "INSERT INTO `orders`(`Customer_id`, `Amount`, `Payment_method`, `order_Status`,`orderTime`) VALUES ('$customer_id','$amount','$pay_method','Active','$orderTime')";
 						$res = mysqli_query($con,$sql);
 			if ($res) {
 				$order_id =  mysqli_insert_id($con);

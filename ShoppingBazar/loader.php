@@ -45,7 +45,7 @@
 
     
 <div class="loader">
-    <img src="assets/ShopPage/images/icons/loader.gif" alt="Loading..." />
+    <img src="assets/ShopPage/images/icons/Fidget-spinner.gif" alt="Loading..." />
 </div>
 </body>
 </html>

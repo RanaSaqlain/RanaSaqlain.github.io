@@ -45,7 +45,7 @@
 
     
 <div class="loader">
-    <img src="images/loader.gif" alt="Loading..." />
+    <img src="images/Fidget-spinner.gif" alt="Loading..." />
 </div>
 </body>
 </html>
