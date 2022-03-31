@@ -1,5 +1,27 @@
 <?php
 require_once "loader.php";
+include_once("../db.php");
+$customer_id=null;
+$detail = array();
+if(session_id() == "")
+{
+  session_start();
+}
+if(isset($_SESSION["Customer_id"]))
+{
+
+$customer_id = $_SESSION['Customer_id'];
+}
+
+$sql = "SELECT `order_id`, `Amount`, `orderTime`, customer.City,customer.Street FROM `orders` INNER JOIN customer ON orders.Customer_id = customer.id WHERE orders.Customer_id = '$customer_id' ORDER BY  order_id DESC;";
+$result = mysqli_query($con,$sql); 
+
+ if ($result) {
+
+      while ($row = mysqli_fetch_assoc($result)) {
+        $detail[] = $row; 
+
+      }}
 ?>
 <!DOCTYPE html>
 <html>
@@ -50,24 +72,22 @@ include("topnav.php");
     </tr>
   </thead>
   <tbody>
+  </tbody>
+  <?php  
+        if ($detail != null) {
+          foreach ($detail as $key => $row) {
+          
+       ?>
     <tr>
-      <th scope="row">231F</th>
-      <td>200 $</td>
-      <td>20-01-2022</td>
-      <td>Johar Colony, Sargodha</td>
+      <th scope="row"> <?php  echo $row["order_id"];  ?></th>
+      <td>$<?php  echo $row["Amount"];  ?></td>
+      <td><?php  echo $row["orderTime"];  ?></td>
+      <td><?php  echo $row["Street"]." ".$row["City"]  ;  ?></td>
     </tr>
-    <tr>
-      <th scope="row">87D</th>
-      <td>125 $</td>
-      <td>17-12-2021</td>
-      <td>Johar Colony, Sargodha</td>
-    </tr>
-    <tr>
-      <th scope="row">1272D</th>
-      <td>75 $</td>
-      <td>11-10-2021</td>
-      <td>Johar Colony, Sargodha</td>
-    </tr>
+    <?php  // code...
+      }
+ }  ?> 
+    
   </tbody>
 </table>
 

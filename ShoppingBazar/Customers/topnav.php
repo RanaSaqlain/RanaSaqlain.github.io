@@ -152,20 +152,20 @@
               <div class="dropdown dropdown-menu dropdown-menu-lg dropdown-menu-dark bg-default  dropdown-menu-right ">
                 <div class="row shortcuts px-4">
                   
-                  <a href="#!" class="col-4 shortcut-item">
+                  <a href="change_pass.php" class="col-4 shortcut-item">
                     <span class="shortcut-media avatar rounded-circle bg-gradient-orange">
                       <i class="ni ni-email-83"></i>
                     </span>
-                    <small>Email</small>
+                    <small>Change  Password</small>
                   </a>
-                  <a href="#!" class="col-4 shortcut-item">
+                  <a href="order-details.php" class="col-4 shortcut-item">
                     <span class="shortcut-media avatar rounded-circle bg-gradient-info">
                       <i class="ni ni-credit-card"></i>
                     </span>
                     <small>Payments</small>
                   </a>
                   
-                  <a href="#!" class="col-4 shortcut-item">
+                  <a href="../index.php" class="col-4 shortcut-item">
                     <span class="shortcut-media avatar rounded-circle bg-gradient-yellow">
                       <i class="ni ni-basket"></i>
                     </span>
@@ -183,7 +183,9 @@
                     <img alt="Image placeholder" src="Default.png">
                   </span>
                   <div class="media-body d-none d-lg-block">
-                    <span class=" text-sm  font-weight-bold">Ali Ahmed</span>
+                    <span class=" text-sm  font-weight-bold"><?php if (isset($_SESSION["Customer_id"])) {
+                    echo($_SESSION["Customer_FName"]);
+                    } ?></span>
                   </div>
                 </div>
               </a>

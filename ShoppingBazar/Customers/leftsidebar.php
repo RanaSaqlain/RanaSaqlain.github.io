@@ -1,10 +1,18 @@
-<?php require_once "loader.php"; ?>
+<?php 
+if(session_id() == "")
+{
+  session_start();
+}
+if ($_SESSION["Customer_id"] == "" ){
+  header("location:login.php");
+}
+ require_once "loader.php"; ?>
  <nav class="sidenav navbar navbar-vertical  fixed-left  navbar-expand-xs navbar-light "
  id="sidenav-main" >
     <div class="scrollbar-inner"  >
       <!-- Brand -->
       <div class="sidenav-header  align-items-center bg-white col-12" >
-        <a class="navbar-brand" href="index.php" >
+        <a class="navbar-brand" href="../index.php" >
           <img src="../assets/img/logo/logo_wbg.png" class="navbar-brand-img" alt="..." style="width:90%;min-height:5rem;">
         </a>
          <a class="navbar-link" href="index.php" >

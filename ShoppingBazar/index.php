@@ -22,7 +22,39 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     swal("Shopping Bazar!", "'.$response.'");
 </script>';}
     }
+    if(isset($_POST['wishlist']))
+    {
+       $id = $_POST['pid'];        
+        if ( isset($_SESSION['Customer_id'])) {
+            $customer_id = $_SESSION["Customer_id"];
+            $sql = "SELECT * FROM `wishlist` WHERE  `product_id` = '$id'";
+            $result1 = mysqli_query($con,$sql);
+             $count=mysqli_num_rows($result1);
+                   
+                  if($count>0)
+                  {
+                     echo '<script type="text/javascript">
+    swal("Shopping Bazar!", "Product already exist in your Wishlist");
+</script>';
 
+                    }else
+                    {
+            $sql = "INSERT INTO `wishlist`( `product_id`, `Customer_id`) VALUES ('$id','$customer_id')";
+            $result = mysqli_query($con,$sql);
+            if($result)
+            {
+                 echo '<script type="text/javascript">
+    swal("Shopping Bazar!", "Product Added to your Wishlist");
+</script>';
+            }
+        else
+        {
+            echo '<script type="text/javascript"> swal("Shopping Bazar!", "You need to Login First");
+</script>';
+        }
+     }}
+
+}
 }
 ?>
 
@@ -72,7 +104,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                         <h2>Collection 2021</h2>
                                         <h1>Welcome</h1>
                                         <div class="cr__btn">
-                                            <a href="cart">Shop Now</a>
+                                            <a href="#arival">Shop Now</a>
                                         </div>
                                     </div>
                                 </div>
@@ -96,7 +128,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                         <h2>Collection 2021</h2>
                                         <h1>Welcome</h1>
                                         <div class="cr__btn">
-                                            <a href="cart">Shop Now</a>
+                                            <a href="#arival">Shop Now</a>
                                         </div>
                                     </div>
                                 </div>
@@ -114,7 +146,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         </div>
         <!-- Start Slider Area -->
         <!-- Start Category Area -->
-        <section class="htc__category__area ptb--100">
+        <section class="htc__category__area ptb--100" id="arival">
             <div class="container">
                 <div class="row">
                     <div class="col-xs-12">
@@ -138,16 +170,23 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                             <div class="col-md-4 col-lg-3 col-sm-6 col-xs-12">
                                 <div class="category">
                                     <div class="ht__cat__thumb">
-                                        <a href="ProductDetail?id=<?php echo $list['product_id'] ?>">
+                                        <a href="ProductDetail.php?id=<?php echo $list['product_id'] ?>">
                                             <img src="<?php echo $list['product_Image'] ?>">
                                         </a>
                                     </div>
                                     <div class="fr__hover__info">
                                         <ul class="product__action">
-                                            <li><a href="wishlist"><i class="icon-heart icons"></i></a></li>
+                                            <li>
+                                                    <form action="index.php" method="post" >
+                                                    <input type="hidden" name="pid" value="<?php echo $list['product_id'] ?>">
+                                                    <button type="submit" name="wishlist" >
+                                                       <a><i class="icon-heart icons"></i></a></button>
+                                                </form>
+
+                                                </li>
 
                                             <li>
-                                                <form action="index" method="post" >
+                                                <form action="index.php" method="post" >
                                                     <input type="hidden" name="pid" value="<?php echo $list['product_id'] ?>">
                                                     <button type="submit" name="addtocart" >
                                                         <a><i class="icon-handbag icons"></i></a></button>

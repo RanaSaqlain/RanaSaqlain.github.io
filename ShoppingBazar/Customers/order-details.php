@@ -1,5 +1,27 @@
 <?php
 require_once "loader.php";
+include_once("../db.php");
+$customer_id=null;
+$detail = array();
+if(session_id() == "")
+{
+  session_start();
+}
+if(isset($_SESSION["Customer_id"]))
+{
+
+$customer_id = $_SESSION['Customer_id'];
+}
+
+$sql = "SELECT `order_id`, `Amount`, `orderTime`,`order_Status`,`Payment_method` FROM `orders`  WHERE Customer_id = '$customer_id' ORDER BY  order_id DESC;";
+$result = mysqli_query($con,$sql); 
+
+ if ($result) {
+
+      while ($row = mysqli_fetch_assoc($result)) {
+        $detail[] = $row; 
+
+      }}
 ?>
 <!DOCTYPE html>
 <html>
@@ -46,34 +68,30 @@ include("topnav.php");
       <th scope="col">Order ID</th>
       <th scope="col">Payment</th>
       <th scope="col">Status</th>
-      <th scope="col">Action</th>
+      
     </tr>
   </thead>
   <tbody>
+     <?php  
+        if ($detail != null) {
+          foreach ($detail as $key => $row) {
+          
+       ?>
     <tr>
-      <th scope="row">231F</th>
-      <td>Done</td>
-      <td>In Processing</td>
-      <td><button type="button" class="btn btn-danger">Cancel Order</button></td>
+     <th scope="row"> <?php  echo $row["order_id"];  ?></th>     
+      <td><?php   $retVal = ($row["Payment_method"] == "COD") ? "COD" : "Done" ; echo $retVal;  ?></td>
+      <td><?php  echo $row["order_Status"];  ?></td>
     </tr>
-    <tr>
-      <th scope="row">87D</th>
-      <td>COD</td>
-      <td>Ready To Deliver</td>
-      <td><button type="button" class="btn btn-danger">Cancel Order</button></td>
-    </tr>
-    <tr>
-      <th scope="row">1272D</th>
-      <td>COD</td>
-      <td>Sended</td>
-      <td><button type="button" class="btn btn-danger">Cancel Order</button></td>
-    </tr>
+     <?php     
+   }
+ }  ?> 
   </tbody>
 </table>
 
 
         </div>
     
+ 
       <!-- Footer -->
     <?php
     include "footer.php";

@@ -61,7 +61,12 @@
                                     </div>
                                     <div class="fr__hover__info">
                                         <ul class="product__action">
-                                            <li><a href="wishlist.php"><i class="icon-heart icons"></i></a></li>
+                                            <li> <form action="" method="post" >
+                                                    <input type="hidden" name="pid" value="<?php echo $list['product_id'] ?>">
+                                                    <button type="submit" name="wishlist" >
+                                                       <a><i class="icon-heart icons"></i></a></button>
+                                                </form>
+                                            </li>
 
                                             <li><form action="" method="post" >
                                                     <input type="hidden" name="pid" value="<?php echo $list['product_id'] ?>">
@@ -121,6 +126,10 @@
                                                     <input type="hidden" name="pid" value="<?php echo $list['product_id'] ?>">
                                                     <button type="submit" name="addtocart" >
                                                         <a class="fr__btn">Add To Cart</a></button>
+                                                </form><form action="" method="post"  >
+                                                    <input type="hidden" name="pid" value="<?php echo $list['product_id'] ?>">
+                                                    <button type="submit" name="wishlist" >
+                                                       <a class="btn-inner--icon">Add to Wislist</a></button>
                                                 </form>
                                                         </div>
                                                     </div>

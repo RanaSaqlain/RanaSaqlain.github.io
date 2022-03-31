@@ -203,7 +203,7 @@ $counter = 0;
                                         <a href="#"><i class="icon-magnifier icons"></i></a>
                                     </div>
                                     <div class="header__account">
-                                        <a href="#"><i class="icon-user icons"></i></a>
+                                        <a href="Customers/Index.php"><i class="icon-user icons"></i></a>
                                     </div>
                                     <div class="htc__shopping__cart">
                                         <a class="cart__menu" href="#"><i class="icon-handbag icons"></i>

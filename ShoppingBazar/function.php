@@ -255,8 +255,23 @@ if ($_POST['opp']=="cookie") {
 
 
 }
+// to check email
+  if ($_POST['opp']=="checkmail") {
+  		$email=mysqli_real_escape_string($con,$_POST["email"]);
+  	 $checkemail="SELECT * FROM `customer` WHERE Email='$email'";
+                  $result1=mysqli_query($con,$checkemail);
+                  $count=mysqli_num_rows($result1);
+                  	$sql="";
+                  if($count>0)
+                  {
+                  	echo json_encode("402");
+
+                    }
+  }
+//If the checkout is been set
 if ($_POST['opp']=="checkout") {
 if ($_SESSION['cart'] == null) {
+	//to check whether any how the cart is not empty
     echo json_encode('index.php');
 }else{
  	$order_id=null;
@@ -273,11 +288,11 @@ if ($_SESSION['cart'] == null) {
  			$amount = $_SESSION['subtotal'];
  			$bprice=  $_SESSION['buypricetotal'];
  			$profit =  $amount - $bprice;
-
+ 					//if the payment is Paypla
  				if (!empty($_POST["paypal"])) {
  					$pay_method = "Paypal";
  				}
-
+ 					// if the payment method is stripe then there must exist a stripe token in form
  			if(!empty($_POST['stripeToken'])){
  				$token  = $_POST['stripeToken'];
 
@@ -310,25 +325,37 @@ if ($_SESSION['cart'] == null) {
  		$pay_method ="Stripe";
  }
 
- 			}
- 			$checkemail="SELECT * FROM `customer` WHERE Email='$email'";
+ 			} //ending the stripe
+ 			$customer_id=null;
+ 				// To inform user if the mail already exsist.
+ 			    $checkemail="SELECT * FROM `customer` WHERE Email='$email'";
                   $result1=mysqli_query($con,$checkemail);
                   $count=mysqli_num_rows($result1);
+                  	$sql="";
                   if($count>0)
                   {
-                   echo '<script type="text/javascript">
-    swal("Shopping Bazar!", "Email Already Exists");
-</script>';    
-                  }
-                  else
+                   $row = mysqli_fetch_assoc($result1); 
+                   	$customer_id = $row["id"];
+
+                    $sql = "UPDATE `customer` SET `Stripe_id`='$strie_id',`First_Name`='$first_Name',`Last_Name`='$lastname',`Street`='$streetno',`House`='$houseno',`City`='$city',`Zipcode`='$zip',`Phone`='$phone' WHERE `Email` = '$email' ";
+
+                  }else
                   {
                   	$sql = "INSERT INTO `customer`( `Email`,`Stripe_id`, `First_Name`, `Last_Name`, `Street`, `House`, `City`, `Zipcode`, `Phone`) VALUES ('$email','$strie_id','$first_Name','$lastname','$streetno','$houseno','$city','$zip','$phone')";
-			$result = mysqli_query($con,$sql);	
                   }
+			$result = mysqli_query($con,$sql);	
+                  
 		
 			if ($result) {
-					$customer_id =  mysqli_insert_id($con);
-					 $orderTime=date("M-Y-D");
+
+						if ($customer_id == null) {
+							
+							$customer_id =  mysqli_insert_id($con);
+						}
+					
+
+					
+					 $orderTime=date("l jS \of F Y h:i:s A");
 						$sql = "INSERT INTO `orders`(`Customer_id`, `Amount`, `Payment_method`, `order_Status`,`orderTime`) VALUES ('$customer_id','$amount','$pay_method','Active','$orderTime')";
 						$res = mysqli_query($con,$sql);
 			if ($res) {

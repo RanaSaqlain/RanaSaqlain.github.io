@@ -1,3 +1,28 @@
+<?php
+require_once "loader.php";
+include_once("../db.php");
+$customer_id=null;
+$detail = array();
+if(session_id() == "")
+{
+  session_start();
+}
+if(isset($_SESSION["Customer_id"]))
+{
+
+$customer_id = $_SESSION['Customer_id'];
+}
+
+$sql = "SELECT products.* ,wishlist.* FROM products INNER JOIN wishlist on products.product_id = wishlist.product_id WHERE wishlist.Customer_id = '$customer_id'ORDER BY  wishlist_id DESC;";
+$result = mysqli_query($con,$sql); 
+
+ if ($result) {
+
+      while ($row = mysqli_fetch_assoc($result)) {
+        $detail[] = $row; 
+
+      }}
+?>
 
 <!DOCTYPE html>
 <html>
@@ -38,40 +63,26 @@ include("topnav.php");
         <h2 class="text-center">WishList</h2>
 
 <div class="row">
+    <?php  
+        if ($detail != null) {
+          foreach ($detail as $key => $row) {
+          
+       ?>
+       <a  href="../ProductDetail.php?id=<?php echo $row['product_id'] ?>">
   <div class="col-xs-4  ml-3">
      <div class="card" style="width: 18rem;">
-  <img src="Mobile.jpg" class="card-img-top" alt="Mobile Image">
+  <img src="<?php  echo $row["product_img_admin"];  ?>" class="card-img-top" alt="Mobile Image">
   <div class="card-body">
-    <h5 class="card-title">A New Brand Mobile</h5>
-    <p class="card-text">Available In Just 200 $</p>
-<button type="button" class="btn btn-primary">Add To Cart</button>
-  </div>
-</div>
-</div>
-  <div class="col-xs-4 ml-3">
+    <h5 class="card-title"><?php  echo $row["product_Name"];  ?></h5>
+    <p class="card-text">Available In Just $<?php  echo $row["product_sprice"];  ?></p>
 
-
-        <div class="card" style="width: 18rem;">
-  <img src="Watch.png" class="card-img-top" alt="Watch Image">
-  <div class="card-body">
-    <h5 class="card-title">New Design Watch</h5>
-    <p class="card-text">Available In Just 75 $</p>
-<button type="button" class="btn btn-primary">Add To Cart</button>
   </div>
 </div>
-</div>
-    <div class="col-xs-4 ml-3">
-
-<div class="card" style="width: 18rem;">
-  <img src="Headphones.png" class="card-img-top" alt="Headphones Image">
-  <div class="card-body">
-    <h5 class="card-title">Headphones with amazing sound</h5>
-    <p class="card-text">Available In Just 150 $</p>
-<button type="button" class="btn btn-primary">Add To Cart</button>
-  </div>
-</div>      
-    
-  </div>
+</div> </a>
+ <?php  // code...
+      }
+ }  ?> 
+ 
 </div>
        
 

@@ -1,4 +1,5 @@
-<?php
+<?php 
+
  $srched = array();
 
 require_once('top.php');
@@ -11,10 +12,20 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
      
       $srched=  get_searched_product($con , $srch);
     }
-}
-	?>
 
- <div class="body__overlay"></div>
+    if(isset($_POST['addtocart']))
+    {
+       $id = $_POST['pid'];        
+     $response = addtocart($con,$id);
+     if ($response != null) {
+        echo '<script type="text/javascript">
+    swal("Shopping Bazar!", "'.$response.'");
+</script>';}
+    }
+
+}
+?>
+  <div class="body__overlay"></div>
         <!-- Start Offset Wrapper -->
         <div class="offset__wrapper">
             <!-- Start Search Popap -->
@@ -46,41 +57,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                             include("srchedproducts.php");
                     }
                    ?>
- 
-        <!-- Start Slider Area -->
-         <div class="ht__bradcaump__area" style="background: rgba(0, 0, 0, 0) url(#) no-repeat scroll center center / cover ;">
-            <div class="ht__bradcaump__wrap">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-xs-12">
-                            <div class="bradcaump__inner">
-                                <nav class="bradcaump-inner">
-                                  <a class="breadcrumb-item" href="index.php">Home</a>
-                                  <span class="brd-separetor"><i class="zmdi zmdi-chevron-right"></i></span>
-                                  <span class="breadcrumb-item active">ThankYou</span>
-                                </nav>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- End Bradcaump area -->
-        <div class="row text-center">
-        	<span class="col-md-12 text-success h2"> Thank You for Shopping At Shopping Bazar</span>
-
-        		<span class="col-md-12 text-danger h1">
-        			Your Order ID  is  # <?php  if (isset($_GET['id'])){echo $_GET['id'];} {
-        				// code...
-        			} ?>
-        		</span>
-                <h3> Your Current Password is  : 12345678    </h3>
-                <h5> You can change is after login</h5>
-        </div>
-        		
-
-	<?php
-
-include_once"footer.php";
-
-	?>
+		<div class="container text-center">
+		<h2> Drop Us a  Email</h2>
+			<h1 style="margin-top:3rem;margin-bottom:3rem">ShoppingBazar@gmail.com</h1>
+			<h2> WhatsApp</h2>
+					<h2 style="margin-top:3rem;margin-bottom:1rem"> +9234...... </h2>
+							
+</div>	
+  <?php 
+     require('footer.php');
+ ?>

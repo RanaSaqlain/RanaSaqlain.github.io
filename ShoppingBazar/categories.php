@@ -1,6 +1,9 @@
 <?php 
  $srched = array();
- 
+ if (!isset($_GET['id'])) {
+    header("Location:index.php");
+    exit;
+}
 require_once('top.php');
 require_once 'db.php';
 require_once "function.php";
@@ -27,7 +30,39 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 </script>';}
 
     }
+     if(isset($_POST['wishlist']))
+    {
+       $id = $_POST['pid'];        
+        if ( isset($_SESSION['Customer_id'])) {
+            $customer_id = $_SESSION["Customer_id"];
+            $sql = "SELECT * FROM `wishlist` WHERE  `product_id` = '$id'";
+            $result1 = mysqli_query($con,$sql);
+             $count=mysqli_num_rows($result1);
+                   
+                  if($count>0)
+                  {
+                     echo '<script type="text/javascript">
+    swal("Shopping Bazar!", "Product already exist in your Wishlist");
+</script>';
 
+                    }else
+                    {
+            $sql = "INSERT INTO `wishlist`( `product_id`, `Customer_id`) VALUES ('$id','$customer_id')";
+            $result = mysqli_query($con,$sql);
+            if($result)
+            {
+                 echo '<script type="text/javascript">
+    swal("Shopping Bazar!", "Product Added to your Wishlist");
+</script>';
+            }
+        else
+        {
+            echo '<script type="text/javascript"> swal("Shopping Bazar!", "You need to Login First");
+</script>';
+        }
+     }}
+
+}
 }
 
 ?>
@@ -132,7 +167,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                     </div>
                                     <div class="fr__hover__info">
                                         <ul class="product__action">
-                                            <li><a href="wishlist.php"><i class="icon-heart icons"></i></a></li>
+                                            <li> <form action="" method="post" >
+                                                    <input type="hidden" name="pid" value="<?php echo $list['product_id'] ?>">
+                                                    <button type="submit" name="wishlist" >
+                                                       <a><i class="icon-heart icons"></i></a></button>
+                                                </form></li>
 
                                             <li>
                                                 <form action="" method="post" >
@@ -189,11 +228,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                                             <li class="old"><i class="icon-star icons"></i></li>
                                                         </ul>
                                                         <p><?php echo $list['product_Description'] ?></p>
-                                                        <div class="fr__list__btn">
-                                                           <form action="" method="post" >
+                                                        <div class="fr__list__btn ">
+                                                           <form action="" method="post"  >
                                                     <input type="hidden" name="pid" value="<?php echo $list['product_id'] ?>">
                                                     <button type="submit" name="addtocart" >
                                                         <a class="fr__btn">Add To Cart</a></button>
+                                                </form>
+                                                 <form action="" method="post"  >
+                                                    <input type="hidden" name="pid" value="<?php echo $list['product_id'] ?>">
+                                                    <button type="submit" name="wishlist" >
+                                                       <a class="btn-inner--icon">Add to Wislist</a></button>
                                                 </form>
                                                         </div>
                                                     </div>

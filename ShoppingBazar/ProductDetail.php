@@ -1,10 +1,14 @@
 <?php 
  $srched = array();
-
+if (!isset($_GET['id'])) {
+    header("Location:index.php");
+    exit;
+}
 require_once('top.php');
 require_once "function.php";
 require 'db.php';
 $product_id=mysqli_real_escape_string($con,$_GET['id']);
+   
 $get_product=get_products_detail($con,$product_id);
  $catid=mysqli_real_escape_string($con,$_GET['id']);
  $get_cat_name=get_cats_name($con,$catid);
@@ -26,8 +30,39 @@ $get_product=get_products_detail($con,$product_id);
 
     }
 
+  if(isset($_POST['wishlist']))
+    {
+       $id = $_POST['pid'];        
+        if ( isset($_SESSION['Customer_id'])) {
+            $customer_id = $_SESSION["Customer_id"];
+            $sql = "SELECT * FROM `wishlist` WHERE  `product_id` = '$id'";
+            $result1 = mysqli_query($con,$sql);
+             $count=mysqli_num_rows($result1);
+                   
+                  if($count>0)
+                  {
+                     echo '<script type="text/javascript">
+    swal("Shopping Bazar!", "Product already exist in your Wishlist");
+</script>';
 
+                    }else
+                    {
+            $sql = "INSERT INTO `wishlist`( `product_id`, `Customer_id`) VALUES ('$id','$customer_id')";
+            $result = mysqli_query($con,$sql);
+            if($result)
+            {
+                 echo '<script type="text/javascript">
+    swal("Shopping Bazar!", "Product Added to your Wishlist");
+</script>';
+            }
+        else
+        {
+            echo '<script type="text/javascript"> swal("Shopping Bazar!", "You need to Login First");
+</script>';
+        }
+     }}
 
+}
 }
 ?>
 
@@ -139,6 +174,11 @@ $get_product=get_products_detail($con,$product_id);
                                                     <input type="hidden" name="pid" value="<?php echo $list['product_id'] ?>">
                                                     <button type="submit" name="addtocart" >
                                                         <a class="fr__btn">Add To Cart</a></button>
+                                                </form>
+                                                <form action="" method="post"  >
+                                                    <input type="hidden" name="pid" value="<?php echo $list['product_id'] ?>">
+                                                    <button type="submit" name="wishlist" >
+                                                       <a class="btn-inner--icon">Add to Wislist</a></button>
                                                 </form>
                                                             
                                   </div>
