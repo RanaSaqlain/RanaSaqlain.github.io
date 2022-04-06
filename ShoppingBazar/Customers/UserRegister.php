@@ -1,5 +1,7 @@
 <?php
 $error=false;
+$insert=false;
+$notinsert=false;
 session_start();
 require_once "../db.php";
 if (isset($_COOKIE["Customer_ID"])) {
@@ -17,40 +19,41 @@ if(isset($_SESSION['Customer_id']))
  {
 header("Location:index.php");
 }
-
 if (isset($_POST['Submit'])) {
+    $fname=$_POST['fname'];
+    $lname=$_POST['lname'];
+    $email=$_POST['email'];
+    $pass=$_POST['pass'];
+    $housename=$_POST['housename'];
+    $streetname=$_POST['streetname'];
+    $cityname=$_POST['cityname'];
+    $zipcodename=$_POST['zipcodename'];
+    $phonenumbername=$_POST['phonenumbername'];
 
-$email = mysqli_real_escape_string($con, $_POST['email']);
-$password = mysqli_real_escape_string($con, $_POST['pass']);
-$login="SELECT * FROM `customer` WHERE Email='$email' AND Password ='$password'";
-$result=mysqli_query($con,$login);
-if($result){
-$row = mysqli_fetch_array($result);
-if(!empty($row))
+$checkemail="SELECT * FROM `customer` WHERE Email='$email'";
+  $result1=mysqli_query($con,$checkemail);
+    $count=mysqli_num_rows($result1);
+
+    if ($count>0)
+     {
+       $error=true;
+    }
+    else
+    { $sql="INSERT INTO `customer`( `Email`, `Password`, `Stripe_id`, `First_Name`, `Last_Name`, `Street`, `House`, `City`, `Zipcode`, `Phone`) VALUES ('$email','$pass','Not Order Yet','$fname','$lname','$streetname','$housename','$cityname','$zipcodename','$phonenumbername')";
+    $result=mysqli_query($con,$sql);
+if($result)
 {
-$_SESSION['Customer_id'] = $row['id'];
-$_SESSION['Customer_FName'] = $row['First_Name'];
-
-if(isset($_POST['checkcookie']))
+    $insert=true;
+}
+else
 {
-  $cookie_adminid  = $row['id'];
-  $cookie_adminfname = $row['First_Name'];
-
-    setcookie("Customer_ID",$cookie_adminid, time() + (86400 * 30), "/") ;
-    setcookie("Customer_FName",$cookie_adminfname, time() + (86400 * 30), "/") ;
+$notinsert=true;
+}}
    
+
 }
 
-
-header("Location:index.php");
-}else
-{$error=true;}}}
-
-
-
-
 ?>
-
 <!DOCTYPE html>
 <html>
 
@@ -68,7 +71,8 @@ header("Location:index.php");
   <link rel="stylesheet" href="../assets/vendor/nucleo/css/nucleo.css" type="text/css">
   <link rel="stylesheet" href="../assets/vendor/@fortawesome/fontawesome-free/css/all.min.css" type="text/css">
   <!-- Argon CSS -->
-  <link rel="stylesheet" href="../assets/css/argon.css?v=1.2.0" type="text/css">
+  <link rel="stylesheet" href="../assets/css/argon.css?v=1.2.0" type="text/css"> <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
 </head>
 
 <body class="bg-default">
@@ -137,8 +141,8 @@ header("Location:index.php");
       </div>
     </div>
   </nav>
-  <!-- Main content -->
-  <div class="main-content">
+
+ <div class="main-content">
     <!-- Header -->
     <div class="header bg-gradient-primary py-7 py-lg-8 pt-lg-9">
       <div class="container">
@@ -157,14 +161,30 @@ header("Location:index.php");
         </svg>
       </div>
     </div>
-    <!-- Page content -->
-    <div class="container mt--8 pb-5">
+
+     <div class="container mt--8 pb-5">
     <div class="row justify-content-center">
         <div class="col-lg-5 col-md-7">
                           <?php
+if($insert){
+  echo '<div class="alert alert-warning alert-dismissible fade show" role="alert">
+  <strong>Successfully Registered</strong>
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>';
+}
+if($notinsert){
+  echo '<div class="alert alert-warning alert-dismissible fade show" role="alert">
+  <strong>SomeThing Went Wrong</strong>
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>';
+}
 if($error){
   echo '<div class="alert alert-warning alert-dismissible fade show" role="alert">
-  <strong>Invalid Email or Password</strong>
+  <strong>Email Already Exist</strong>
   <button type="button" class="close" data-dismiss="alert" aria-label="Close">
     <span aria-hidden="true">&times;</span>
   </button>
@@ -172,17 +192,35 @@ if($error){
 }
 
 ?>
-         <div class="card bg-secondary border-0 mb-0">
+
+        <div class="card bg-secondary border-0 mb-0">
             
             <div class="card-body px-lg-5 py-lg-5">
               
-              <form role="form" method="post" action="" >
+              <form role="form" onsubmit="return validation()" method="post" action="" >
                 <div class="form-group mb-3">
                   <div class="input-group input-group-merge input-group-alternative">
                     <div class="input-group-prepend">
                       <span class="input-group-text"><i class="ni ni-email-83"></i></span>
                     </div>
-                    <input class="form-control" placeholder="Email" type="email" name="email">
+                    <input class="form-control" placeholder="Enter First Name" type="text" name="fname" id="fname">
+                  </div>
+                </div>
+                <div class="form-group mb-3">
+                  <div class="input-group input-group-merge input-group-alternative">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text"><i class="ni ni-email-83"></i></span>
+                    </div>
+                    <input class="form-control" placeholder="Enter Last Name" type="text" name="lname" id="lname">
+                  </div>
+                </div>
+
+                <div class="form-group mb-3">
+                  <div class="input-group input-group-merge input-group-alternative">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text"><i class="ni ni-email-83"></i></span>
+                    </div>
+                    <input class="form-control" placeholder="Email" type="email" name="email" id="email">
                   </div>
                 </div>
                 <div class="form-group">
@@ -190,7 +228,47 @@ if($error){
                     <div class="input-group-prepend">
                       <span class="input-group-text"><i class="ni ni-lock-circle-open"></i></span>
                     </div>
-                    <input class="form-control" placeholder="Password" type="password" name="pass">
+                    <input class="form-control" placeholder="Password" type="password" name="pass" id="pass">
+                  </div>
+                </div>
+                <div class="form-group mb-3">
+                  <div class="input-group input-group-merge input-group-alternative">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text"><i class="ni ni-email-83"></i></span>
+                    </div>
+                    <input class="form-control" placeholder="Enter Street Name" type="text" name="streetname" id="street">
+                  </div>
+                </div>
+                <div class="form-group mb-3">
+                  <div class="input-group input-group-merge input-group-alternative">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text"><i class="ni ni-email-83"></i></span>
+                    </div>
+                    <input class="form-control" placeholder="Enter House Name" type="text" name="housename" id="house">
+                  </div>
+                </div>
+                <div class="form-group mb-3">
+                  <div class="input-group input-group-merge input-group-alternative">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text"><i class="ni ni-email-83"></i></span>
+                    </div>
+                    <input class="form-control" placeholder="Enter City" type="text" name="cityname" id="city">
+                  </div>
+                </div>
+                <div class="form-group mb-3">
+                  <div class="input-group input-group-merge input-group-alternative">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text"><i class="ni ni-email-83"></i></span>
+                    </div>
+                    <input class="form-control" placeholder="Enter ZipCode" type="text" name="zipcodename" id="zip">
+                  </div>
+                </div>
+                <div class="form-group mb-3">
+                  <div class="input-group input-group-merge input-group-alternative">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text"><i class="ni ni-email-83"></i></span>
+                    </div>
+                    <input class="form-control" placeholder="Enter Phone Number" type="text" name="phonenumbername" id="phone">
                   </div>
                 </div>
                 <div class="custom-control custom-control-alternative custom-checkbox">
@@ -201,23 +279,24 @@ if($error){
                 </div>
                
                 <div class="text-center">
-                  <button class="btn btn-primary my-4" type="submit" name="Submit">Sign in</button>
+                  <button class="btn btn-primary my-4" type="submit" name="Submit" >Sign Up</button>
                 </div>
               </form>
             </div>
           </div>
-                     <div class="row mt-3">
+             <div class="row mt-3">
             <div class="col-5">
               <a href="#" class="text-light"><small>Forgot password?</small></a>
             </div>
-            <div class="col-7"><a href="UserRegister.php">Don't Have a Account Click Here</a></div>
+            <div class="col-7"><a href="login.php">Already Have a Account</a></div>
 
            </div>
-        </div>
       </div>
-    </div>
   </div>
-  <!-- Footer -->
+</div>
+</div>
+
+
   <footer class="py-5" id="footer-main">
     <div class="container">
       <div class="row align-items-center justify-content-xl-between">
@@ -250,6 +329,78 @@ if($error){
   <script src="../assets/vendor/jquery-scroll-lock/dist/jquery-scrollLock.min.js"></script>
   <!-- Argon JS -->
   <script src="../assets/js/argon.js?v=1.2.0"></script>
-</body>
+<script type="text/javascript">
+           function validation()
+        {
+           var Fname=document.getElementById("fname").value;
+           var Lname=document.getElementById("lname").value;
+           var street=document.getElementById("street").value;
+           var house=document.getElementById("house").value;
+           var city=document.getElementById("city").value;
+           var zip=document.getElementById("zip").value;
+           var email=document.getElementById("email").value;
+           var phone=document.getElementById("phone").value;
+           var pass=document.getElementById("pass").value;
 
+          if (fname == "" ||   $.isNumeric(fname)  ) {
+            
+            swal("Shopping Bazar!", "First name Canot have Number in it ");
+            return false;
+          }
+           else if (lname == "" ||   $.isNumeric(lname)  ) {
+            
+            swal("Shopping Bazar!", "Last name Canot have Number in it ");
+             return false;
+          }
+        if (street == "") {
+            
+            swal("Shopping Bazar!", " Please Provide Street No ");
+             return false;
+          }  
+          if (house == "") {
+            
+            swal("Shopping Bazar!", "Please Provide House No");
+             return false;
+          }
+           
+            if (city == "") {
+            
+            swal("Shopping Bazar!", "Please Provide City");
+             return false;
+          }
+          if (pass == "") {
+            
+            swal("Shopping Bazar!", "Please Provide Password");
+             return false;
+          }
+       
+        if (zip == "") {
+            
+            swal("Shopping Bazar!", "Please Provide Zip Code");
+             return false;
+          }
+            if (phone == "" ) {
+             swal("Shopping Bazar!", "Please Provide Phone");
+              return false;
+          }
+            if (email == ""  ) {
+             swal("Shopping Bazar!", "Please Provide Email");
+              return false;
+          }
+         if(email.indexOf('@')<=0)
+    {
+      swal("Shopping Bazar!", "@ Invalid Position");
+              return false;
+    }
+     if((email.charAt(email.length-4)!='.')&&(email.charAt(email.length-3)!='.'))
+
+    {
+      swal("Shopping Bazar!", ". Invalid Position");
+              return false;
+    }
+
+          }
+
+</script>
+</body>
 </html>

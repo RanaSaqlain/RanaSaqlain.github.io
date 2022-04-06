@@ -1,13 +1,14 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.1
+-- version 4.9.0.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 31, 2022 at 08:16 AM
--- Server version: 10.4.21-MariaDB
--- PHP Version: 8.0.10
+-- Generation Time: Apr 06, 2022 at 06:57 PM
+-- Server version: 10.4.6-MariaDB
+-- PHP Version: 7.3.9
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -102,7 +103,8 @@ CREATE TABLE `customer` (
 INSERT INTO `customer` (`id`, `Email`, `Password`, `Stripe_id`, `First_Name`, `Last_Name`, `Street`, `House`, `City`, `Zipcode`, `Phone`) VALUES
 (1, 'test@test.com', '12345678', 'cus_LPpy1Hj2JMvyfo', 'Test', 'user', 'Sargodha , Pakistan', 'h4', 'Sargodha', '40100', '03447867'),
 (2, 'msaqlain6666@gmail.com', '12345678', 'cus_LPq6483kkV4LyO', 'Muhammad', 'Saqlain', 'h#3, test apartments', 'h4', 'Sargodha', '40100', '98989898'),
-(3, 'john@gmail.com', '12345678', '0000', 'john', 'Deen', 'Street1', ' 1', 'NewYork', '89711', '123331111');
+(3, 'john@gmail.com', '12345678', '0000', 'john', 'Deen', 'Street1', ' 1', 'NewYork', '89711', '123331111'),
+(5, 'sharjeel90000@gmail.com', '123123', 'Not Order Yet', 'Sharjeel', 'ahmed', '4', 'h5', 'Sargodha', '40100', '03099930195');
 
 -- --------------------------------------------------------
 
@@ -124,7 +126,7 @@ CREATE TABLE `manager` (
 --
 
 INSERT INTO `manager` (`mid`, `Name`, `Email`, `Password`, `MobileNo`, `DateAndTIme`) VALUES
-(4, 'Sharjeel Ahmed', 'sharjeeelahmed833195@gmail.com', 'Shar*1234', '030999301958c', '2022-01-14 18:03:21'),
+(4, 'Sharjeel Ahmed', 'sharjeeelahmed833195@gmail.com', 'Shar*1234', '030999301958', '2022-01-14 18:03:21'),
 (5, 'Baqir Alii', 'baqir@gmail.com', '7777', '03099930195', '2022-01-14 18:47:18'),
 (14, 'Muhammad Saqlain', 'msaqlain6666@gmail.com', '12345', '034407', '2022-01-16 18:44:17'),
 (17, 'Test user', 'test@test.com', 'test', '03440794447', '2022-01-16 18:53:37');
@@ -357,7 +359,7 @@ ALTER TABLE `category`
 -- AUTO_INCREMENT for table `customer`
 --
 ALTER TABLE `customer`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `manager`

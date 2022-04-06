@@ -13,6 +13,7 @@ if(isset($_SESSION["Customer_id"]))
 $customer_id = $_SESSION['Customer_id'];
 }
 
+
 $sql = "SELECT `order_id`, `Amount`, `orderTime`, customer.City,customer.Street FROM `orders` INNER JOIN customer ON orders.Customer_id = customer.id WHERE orders.Customer_id = '$customer_id' ORDER BY  order_id DESC;";
 $result = mysqli_query($con,$sql); 
 

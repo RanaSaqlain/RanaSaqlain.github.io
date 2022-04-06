@@ -38,6 +38,12 @@ require_once "loader.php";
               </a>
             </li>
             <li class="nav-item">
+              <a class="nav-link" href="SalesReport.php">
+                <i class="ni ni-tv-2 text-primary"></i>
+                <span class="nav-link-text">Sales Report</span>
+              </a>
+            </li>
+            <li class="nav-item">
               <a class="nav-link" href="logout.php">
                 <i class="ni ni-planet text-orange"></i>
                 <span class="nav-link-text">Logout</span>
