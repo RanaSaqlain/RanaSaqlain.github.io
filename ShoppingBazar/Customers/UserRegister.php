@@ -342,12 +342,12 @@ if($error){
            var phone=document.getElementById("phone").value;
            var pass=document.getElementById("pass").value;
 
-          if (fname == "" ||   $.isNumeric(fname)  ) {
+          if (Fname == "" ||   $.isNumeric(Fname)  ) {
             
             swal("Shopping Bazar!", "First name Canot have Number in it ");
             return false;
           }
-           else if (lname == "" ||   $.isNumeric(lname)  ) {
+           else if (Lname == "" ||   $.isNumeric(Lname)  ) {
             
             swal("Shopping Bazar!", "Last name Canot have Number in it ");
              return false;
