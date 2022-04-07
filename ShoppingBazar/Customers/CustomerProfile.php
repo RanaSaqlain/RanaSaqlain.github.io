@@ -14,37 +14,41 @@ $customer_id = $_SESSION['Customer_id'];
 
 
 }
- if ($_SERVER['REQUEST_METHOD']=='POST'){
+if ($_SERVER['REQUEST_METHOD']=='POST'){
  if(isset($_POST['srnoedit']))
   {
+   
     $srno=$_POST['srnoedit'];
-    $FName=$_POST[]
-    $LName=$_POST[]
-    $Street=$_POST[]
-    $House=$_POST[]
-    $City=$_POST[]
-    $Zipcode=$_POST[]
-    $Phone=$_POST[]
-    Update_custfname.value=;
-Update_custlname.value=;
-Update_custstreet.value=
-Update_custhouse.value=;
-Update_custcity.value=;
-Update_custzipcode.value=;
-Update_custphone.value=;
-    
+    $FName=$_POST['Update_custfname'];
+    $LName=$_POST['Update_custlname'];
+    $Street=$_POST['Update_custstreet'];
+    $House=$_POST['Update_custhouse'];
+    $City=$_POST['Update_custcity'];
+    $Zipcode=$_POST['Update_custzipcode'];
+    $Phone=$_POST['Update_custphone'];
+    $Email=$_POST['Update_custemail'];
+    $checkemail="SELECT * FROM `customer` WHERE Email='$Email'";
+  $result2=mysqli_query($con,$checkemail);
+
+    $count=mysqli_num_rows($result2);
+
+    if ($count>0)
+     {
+      echo '<script>alert("Email Exist");</script>';
+    }
+    else
+    {
+
+
+   $updatesql=" UPDATE `customer` SET `id`='$srno', `Email`= '$Email', `First_Name`= '$FName',`Last_Name`='$LName',`Street`='$Street',`House`='$House',`City`='$City',`Zipcode`='$Zipcode',`Phone`='$Phone' WHERE `customer`.`id`='$customer_id'";
+   $result1=mysqli_query($con,$updatesql);
+}
+   
   }
 }
 
 
-$sql="SELECT * FROM customer where id='$customer_id'";
-$result = mysqli_query($con,$sql); 
 
- if ($result) {
-
-      while ($row = mysqli_fetch_assoc($result)) {
-        $detail[] = $row; 
-      }}
 
 ?>
 <!DOCTYPE html>
@@ -90,7 +94,8 @@ include("topnav.php");
             <table class="table table-striped table-responsive">
   <thead>
     <tr>
-      <th scope="col">Customer ID</th>
+      <th scope="col">Sr.No</th>
+      <th scope="col">Email</th>
       <th scope="col">First Name</th>
       <th scope="col">Last Name</th>
       <th scope="col">Street</th>
@@ -98,50 +103,47 @@ include("topnav.php");
       <th scope="col">City</th>
       <th scope="col">Zip Code</th>
       <th scope="col">Phone</th>
+      
     </tr>
   </thead>
   <tbody>
-  </tbody>
-  <?php  
-        if ($detail != null) {
-          foreach ($detail as $key => $row) {
-          
-       ?>
-       <tr>
-      <th scope="row"> <?php  echo $row["id"];  ?></th>
-      <td><?php  echo $row["First_Name"];  ?></td>
-      <td><?php  echo $row["Last_Name"];  ?></td>
-     <td><?php  echo $row["Street"] ;  ?></td>
-     <td><?php  echo $row["House"] ;  ?></td>
-     <td><?php  echo $row["City"] ;  ?></td>
-     <td><?php  echo $row["Zipcode"] ;  ?></td>
-     <td><?php  echo $row["Phone"] ;  ?></td>
-     <div class="col-md-12 mt-5">
-  <button type="button" class=" edit btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal"  id="$row['id']"  >
-  Update Profile
-</button>
-    </tr>
-    <?php  // code...
-      }
- }  ?> 
+      <?php
+    $sql="SELECT * FROM customer where id='$customer_id'";
+$result = mysqli_query($con,$sql); 
+$id=0;
+
+      while ($row = mysqli_fetch_assoc($result)) {
+        $id=$id+1;
+        
+    echo "<tr>
+   
+    
+      <th scope='row'>".$id."</th>
+       <td>".$row['Email']."</td>
+      <td>".$row['First_Name']."</td>
+      <td>".$row['Last_Name']."</td>
+      <td>".$row['Street']."</td>
+      <td>".$row['House']."</td>
+      <td>".$row['City']."</td>
+      <td>".$row['Zipcode']."</td>
+      <td>".$row['Phone']."</td>
+      
+    <button class='edit btn btn-primary ' id=".$row['id'].">Edit Profile</button></td>
+    </tr>";
+     }
+    
+  ?>
+ 
     
   </tbody>
 </table>
 
-        </div>
-<!-- Button trigger modal -->
-
-
-<!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-scrollable">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        <form method="post" action="">
+       
+    
+      
+    </div>
+    <div class="col-md-8">
+       <form method="post" action="">
           <input type="hidden" name="srnoedit" id="srnoedit">
         <div class="form-group">
             <label>First Name</label>
@@ -155,6 +157,11 @@ include("topnav.php");
             <label>Street</label>
             <input type="text" name="Update_custstreet" id="Update_custstreet" class="form-control">
         </div>
+         <div class="form-group">
+            <label>Email</label>
+            <input type="text" name="Update_custemail" id="Update_custemail" class="form-control">
+        </div>
+
         <div class="form-group">
             <label>House</label>
             <input type="text" name="Update_custhouse" id="Update_custhouse" class="form-control">
@@ -171,11 +178,9 @@ include("topnav.php");
             <label>Phone</label>
             <input type="text" name="Update_custphone" id="Update_custphone" class="form-control">
         </div>
+                <button class="btn btn-primary" name="submit" type="submit" >Update Profile</button>
+    
       </form>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Update Profile</button>
       </div>
     </div>
   </div>
@@ -210,14 +215,17 @@ Array.from(edits).forEach((element)=>{
 element.addEventListener("click",(e)=>{
 console.log("edit ");
 tr=e.target.parentNode.parentNode;
-FName=tr.getElementsByTagName("td")[0].innerText;
-LName=tr.getElementsByTagName("td")[1].innerText;
-Street=tr.getElementsByTagName("td")[2].innerText;
-House=tr.getElementsByTagName("td")[3].innerText;
-City=tr.getElementsByTagName("td")[4].innerText;
-Zipcode=tr.getElementsByTagName("td")[5].innerText;
-Phone=tr.getElementsByTagName("td")[6].innerText;
-console.log(FName,LName,Street,House,City,Zipcode,Phone);
+Email=tr.getElementsByTagName("td")[0].innerText;
+FName=tr.getElementsByTagName("td")[1].innerText;
+LName=tr.getElementsByTagName("td")[2].innerText;
+Street=tr.getElementsByTagName("td")[3].innerText;
+House=tr.getElementsByTagName("td")[4].innerText;
+City=tr.getElementsByTagName("td")[5].innerText;
+Zipcode=tr.getElementsByTagName("td")[6].innerText;
+Phone=tr.getElementsByTagName("td")[7].innerText;
+
+console.log(Email,FName,LName,Street,House,City,Zipcode,Phone);
+Update_custemail.value=Email
 Update_custfname.value=FName;
 Update_custlname.value=LName;
 Update_custstreet.value=Street
@@ -228,7 +236,7 @@ Update_custphone.value=Phone;
 
 srnoedit.value=e.target.id;
 console.log(e.target.id)
-$('#exampleModal').modal('toggle');
+$('#EditModal').modal('toggle');
 
 
 

@@ -1,6 +1,5 @@
 <?php
 require "../db.php";
-require_once "loader.php";
 if($_SERVER['REQUEST_METHOD']=="POST")
 {
   if($_POST['opp']=="add")
