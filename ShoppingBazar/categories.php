@@ -126,12 +126,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         <div class="htc__product__rightidebar">
                             <div class="htc__grid__top">
                                 <div class="htc__select__option">
-                                    <select class="ht__select">
-                                        <option>Default softing</option>
-                                        <option>Sort by popularity</option>
-                                        <option>Sort by average rating</option>
-                                        <option>Sort by newness</option>
-                                    </select>
+                                   
                                 </div>
                                 
                                 <!-- Start List And Grid View -->

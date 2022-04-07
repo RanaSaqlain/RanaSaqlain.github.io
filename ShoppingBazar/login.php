@@ -127,6 +127,26 @@ else{
   <link rel="stylesheet" href="assets/vendor/@fortawesome/fontawesome-free/css/all.min.css" type="text/css">
   <!-- Argon CSS -->
   <link rel="stylesheet" href="assets/css/argon.css?v=1.2.0" type="text/css">
+  <script type="text/javascript">
+    function validate()
+    {
+  var Email=document.getElementById("emailcheck").value;
+  var Pass=document.getElementById("Pass").value;
+  if(Email=="")
+
+    {
+      document.getElementById("EmailError").innerHTML="Please Provide Email"
+      return false;
+    }
+    if (Pass=="") 
+    {
+      document.getElementById("checkpass").innerHTML="Please Enter Password";
+      return false;
+    }
+  }
+
+ 
+  </script>
 </head>
 
 <body class="bg-default">
@@ -234,13 +254,14 @@ if($error){
             
             <div class="card-body px-lg-5 py-lg-5">
               
-              <form role="form" method="post" action="" >
+              <form role="form" method="post" action="" onsubmit="return validate()" >
                 <div class="form-group mb-3">
                   <div class="input-group input-group-merge input-group-alternative">
                     <div class="input-group-prepend">
                       <span class="input-group-text"><i class="ni ni-email-83"></i></span>
                     </div>
-                    <input class="form-control" placeholder="Email" type="email" name="email">
+                    <input class="form-control" id="emailcheck" placeholder="Email" type="email" name="email">
+                    <span id="EmailError" class="text-danger"></span>
                   </div>
                 </div>
                 <div class="form-group">
@@ -248,7 +269,8 @@ if($error){
                     <div class="input-group-prepend">
                       <span class="input-group-text"><i class="ni ni-lock-circle-open"></i></span>
                     </div>
-                    <input class="form-control" placeholder="Password" type="password" name="pass">
+                    <input class="form-control" placeholder="Password" type="password" name="pass" id="Pass">
+                    <span id="checkpass" class="text-danger"></span>
                   </div>
                 </div>
                 <div class="custom-control custom-control-alternative custom-checkbox">
@@ -258,7 +280,7 @@ if($error){
                   </label>
                 </div>
                 <div class="text-center">
-                  <button class="btn btn-primary my-4" type="submit" name="Submit">Sign in</button>
+                  <button class="btn btn-primary my-4" type="submit" name="Submit" >Sign in</button>
                 </div>
               </form>
             </div>

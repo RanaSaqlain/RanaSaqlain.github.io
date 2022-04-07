@@ -32,11 +32,11 @@
                                 <h2 class="title__line--2">information</h2>
                                 <div class="ft__inner">
                                     <ul class="ft__list">
-                                        <li><a href="#">About us</a></li>
-                                        <li><a href="#">Delivery Information</a></li>
-                                        <li><a href="#">Privacy & Policy</a></li>
-                                        <li><a href="#">Terms  & Condition</a></li>
-                                        <li><a href="#">Manufactures</a></li>
+                                        <li><a href="aboutus.php">About us</a></li>
+                                        <li><a href="DI.php">Delivery Information</a></li>
+                                        <li><a href="Privacyp.php">Privacy & Policy</a></li>
+                                        <li><a href="TermCon.php">Terms  & Condition</a></li>
+                                        
                                     </ul>
                                 </div>
                             </div>
@@ -49,9 +49,9 @@
                                 <h2 class="title__line--2">Our service</h2>
                                 <div class="ft__inner">
                                     <ul class="ft__list">
-                                        <li><a href="#">My Account</a></li>
+                                        <li><a href="Customers/login.php">My Account</a></li>
                                         <li><a href="show-cart">My Cart</a></li>
-                                        <li><a href="#">Login</a></li>
+                                        <li><a href="Customers/login.php">Login</a></li>
                                         <li><a href="wishlist">Wishlist</a></li>
                                         <li><a href="checkout">Checkout</a></li>
                                     </ul>
@@ -64,13 +64,14 @@
                             <div class="footer">
                                 <h2 class="title__line--2">NEWSLETTER </h2>
                                 <div class="ft__inner">
+                                    <form method="post">
                                     <div class="news__input">
-                                        <input type="text" placeholder="Your Mail*">
+                                        <input type="email" placeholder="Your Mail*" required>
                                         <div class="send__btn">
-                                            <a class="fr__btn" href="#">Send Mail</a>
+                                            <a class="fr__btn" href="#" type="button" name="Submit">Send Mail</a>
                                         </div>
                                     </div>
-                                    
+                                    </form>
                                 </div>
                             </div>
                         </div>
