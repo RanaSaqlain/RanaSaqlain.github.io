@@ -1,5 +1,6 @@
 <?php
 require 'auth_session.php';
+require '../db.php';
 
 ?>
 <!DOCTYPE html>
