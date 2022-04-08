@@ -68,7 +68,7 @@ if ($_SERVER['REQUEST_METHOD']=='POST'){
   <!-- Page plugins -->
   <!-- Argon CSS -->
      <link rel="stylesheet" type="text/css" href="bootstrap-5.1.3-dist/css/bootstrap.min.css">
-      <script src="bootstrap-5.1.3-dist/js/bootstrap.min.js"></script>
+      
   <link rel="stylesheet" href="../assets/css/argon.css?v=1.2.0" type="text/css">
     
 </head>
@@ -198,9 +198,9 @@ $id=0;
 
     ?>
     </div>
-
+<script src="bootstrap-5.1.3-dist/js/bootstrap.bundle.min.js"></script>
    <script src="../assets/vendor/jquery/dist/jquery.min.js"></script>
-  <script src="../assets/vendor/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+  <!-- <script src="../assets/vendor/bootstrap/dist/js/bootstrap.bundle.min.js"></script> -->
   <script src="../assets/vendor/js-cookie/js.cookie.js"></script>
   <script src="../assets/vendor/jquery.scrollbar/jquery.scrollbar.min.js"></script>
   <script src="../assets/vendor/jquery-scroll-lock/dist/jquery-scrollLock.min.js"></script>
