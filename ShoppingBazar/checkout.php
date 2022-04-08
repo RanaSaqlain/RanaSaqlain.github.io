@@ -2,7 +2,18 @@
 include_once("top.php");
 include_once("function.php");
 include_once("db.php");
-
+$customerid="";
+$customerdata = array();
+if ( isset($_SESSION["Customer_id"])){
+  $customerid = $_SESSION['Customer_id'];
+  $sql = "Select * from customer where  id =  '$customerid'";
+  $result = mysqli_query($con,$sql);
+   if ($result) {
+     while ($row = mysqli_fetch_assoc($result)) {
+         $customerdata[] = $row;
+     }
+   }
+}
  $srched = array();
  if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if( isset($_POST["srchbtn"]) )
@@ -98,45 +109,62 @@ if ($_SESSION['cart'] == null) {
                                     </div>
                                     <div class="accordion__body">
                                         <div class="bilinfo">
+                                            
                                             <form action="#" id="addressFormData">
                                                 <div class="row">
                                                     <div class="col-md-12">
                                                         <div class="single-input">
-                                                            <input type="text" placeholder="First name" name="fname" id="fname" required="">
+                                                            <input type="text" placeholder="First name" name="fname" id="fname" required="" value="<?php  if ($customerdata != null ) {
+                                                    echo $customerdata[0]["First_Name"];
+                                            } ?>">
                                                         </div>
                                                     </div><div class="col-md-12">
                                                         <div class="single-input">
-                                                            <input type="text" placeholder="Last name" name="Lname" id="lname" required="">
+                                                            <input type="text" placeholder="Last name" name="Lname" id="lname" required="" value="<?php  if ($customerdata != null ) {
+                                                    echo $customerdata[0]["Last_Name"];
+                                            } ?>">
                                                         </div>
                                                     </div>
                                                     <div class="col-md-12">
                                                         <div class="single-input">
-                                                            <input type="text" placeholder="Street Address" name="street" id="street" required="" >
+                                                            <input type="text" placeholder="Street Address" name="street" id="street" required="" value="<?php  if ($customerdata != null ) {
+                                                    echo $customerdata[0]["Street"];
+                                            } ?>" >
                                                         </div>
                                                     </div>
                                                     <div class="col-md-12">
                                                         <div class="single-input">
-                                                            <input type="text" placeholder="Apartment/Block/House" id="house" required="">
+                                                            <input type="text" placeholder="Apartment/Block/House" id="house" required="" value="<?php  if ($customerdata != null ) {
+                                                    echo $customerdata[0]["House"];
+                                            } ?>">
                                                         </div>
                                                     </div>
                                                     <div class="col-md-6">
                                                         <div class="single-input">
-                                                            <input type="text" placeholder="City/State" name="city"  id='city' required="">
+                                                            <input type="text" placeholder="City/State" name="city"  id='city' required="" value="<?php  if ($customerdata != null ) {
+                                                    echo $customerdata[0]["City"];
+                                            } ?>">
                                                         </div>
                                                     </div>
                                                     <div class="col-md-6">
                                                         <div class="single-input">
-                                                            <input type="number" placeholder="Post code/ zip" name="zip" id="zip" required="">
+                                                            <input type="number" placeholder="Post code/ zip" name="zip" id="zip" required="" value="<?php  if ($customerdata != null ) {
+                                                    echo $customerdata[0]["Zipcode"];
+                                            } ?>">
                                                         </div>
                                                     </div>
                                                     <div class="col-md-6">
                                                         <div class="single-input">
-                                                            <input type="email" placeholder="Email address" name="email" id="email" required="">
+                                                            <input type="email" placeholder="Email address" name="email" id="email" required="" value="<?php  if ($customerdata != null ) {
+                                                    echo $customerdata[0]["Email"];
+                                            } ?>">
                                                         </div>
                                                     </div>
                                                     <div class="col-md-6">
                                                         <div class="single-input">
-                                                            <input type="number" placeholder="Phone number" name="phone" id="phone" required="">
+                                                            <input type="number" placeholder="Phone number" name="phone" id="phone" required="" value="<?php  if ($customerdata != null ) {
+                                                    echo $customerdata[0]["Phone"];
+                                            } ?>">
                                                         </div>
                                                     </div>
                                                      <div class="col-md-6 " style="margin-top:1rem;">
@@ -475,7 +503,9 @@ $(document).ready(function() {
              swal("Shopping Bazar!", "Please Provide Correct Email");
               return false;
           }
-          if (email != "") {
+          var customerid ="<?php echo $customerid; ?>";
+          if (email != "" &&  customerid =="" ) {
+
              $.ajax({
               url: "function.php",
               type: "POST",
