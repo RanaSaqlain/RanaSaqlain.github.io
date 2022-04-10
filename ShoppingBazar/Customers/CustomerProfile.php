@@ -28,21 +28,31 @@ if ($_SERVER['REQUEST_METHOD']=='POST'){
     $Phone=$_POST['Update_custphone'];
     $Email=$_POST['Update_custemail'];
     $checkemail="SELECT * FROM `customer` WHERE Email='$Email'";
-  $result2=mysqli_query($con,$checkemail);
+  // $result2=mysqli_query($con,$checkemail);
 
-    $count=mysqli_num_rows($result2);
+  //   $count=mysqli_num_rows($result2);
 
-    if ($count>0)
-     {
-      echo '<script>alert("Email Exist");</script>';
-    }
-    else
-    {
-
+  //   // if ($count>1)
+  //   //  {
+  //   //   echo '<script>alert("Email Exist");</script>';
+  //   // }
+  //   // else
+  //   // {
+  //   //   echo "";
+  //   // }
 
    $updatesql=" UPDATE `customer` SET `id`='$srno', `Email`= '$Email', `First_Name`= '$FName',`Last_Name`='$LName',`Street`='$Street',`House`='$House',`City`='$City',`Zipcode`='$Zipcode',`Phone`='$Phone' WHERE `customer`.`id`='$customer_id'";
    $result1=mysqli_query($con,$updatesql);
-}
+   if($result1)
+   {
+    echo "<script>alert('Profile Updated');</script>";
+   }
+   else
+   {
+    echo "<script>alert('Profile Not Updated');</script>";
+   }
+ 
+
    
   }
 }
@@ -68,7 +78,7 @@ if ($_SERVER['REQUEST_METHOD']=='POST'){
   <!-- Page plugins -->
   <!-- Argon CSS -->
      <link rel="stylesheet" type="text/css" href="bootstrap-5.1.3-dist/css/bootstrap.min.css">
-      
+      <script src="bootstrap-5.1.3-dist/js/bootstrap.min.js"></script>
   <link rel="stylesheet" href="../assets/css/argon.css?v=1.2.0" type="text/css">
     
 </head>
@@ -128,7 +138,7 @@ $id=0;
       <td>".$row['Zipcode']."</td>
       <td>".$row['Phone']."</td>
       
-    <button class='edit btn btn-primary ' id=".$row['id'].">Edit Profile</button></td>
+    <button class='edit btn btn-primary mt-3 ' id=".$row['id'].">Edit Profile</button></td>
     </tr>";
      }
     
@@ -142,7 +152,7 @@ $id=0;
     
       
     </div>
-    <div class="col-md-8">
+    <div class=" col-lg-6 col-md-8 col-sm-12">
        <form method="post" action="">
           <input type="hidden" name="srnoedit" id="srnoedit">
         <div class="form-group">
@@ -198,9 +208,9 @@ $id=0;
 
     ?>
     </div>
-<script src="bootstrap-5.1.3-dist/js/bootstrap.bundle.min.js"></script>
+
    <script src="../assets/vendor/jquery/dist/jquery.min.js"></script>
-  <!-- <script src="../assets/vendor/bootstrap/dist/js/bootstrap.bundle.min.js"></script> -->
+  <script src="../assets/vendor/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
   <script src="../assets/vendor/js-cookie/js.cookie.js"></script>
   <script src="../assets/vendor/jquery.scrollbar/jquery.scrollbar.min.js"></script>
   <script src="../assets/vendor/jquery-scroll-lock/dist/jquery-scrollLock.min.js"></script>

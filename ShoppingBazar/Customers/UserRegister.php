@@ -173,7 +173,6 @@ if($insert){
     <span aria-hidden="true">&times;</span>
   </button>
 </div>';
- header("location:login.php");
 }
 if($notinsert){
   echo '<div class="alert alert-warning alert-dismissible fade show" role="alert">
@@ -272,8 +271,12 @@ if($error){
                     <input class="form-control" placeholder="Enter Phone Number" type="text" name="phonenumbername" id="phone">
                   </div>
                 </div>
-
-                
+                <div class="custom-control custom-control-alternative custom-checkbox">
+                  <input type="checkbox" name="checkcookie" class="custom-control-input"   id="customCheckLogin" />
+                  <label class="custom-control-label" for="customCheckLogin">
+                    <span class="text-muted">Remember me</span>
+                  </label>
+                </div>
                
                 <div class="text-center">
                   <button class="btn btn-primary my-4" type="submit" name="Submit" >Sign Up</button>
@@ -283,7 +286,7 @@ if($error){
           </div>
              <div class="row mt-3">
             <div class="col-5">
-            
+              <a href="#" class="text-light"><small>Forgot password?</small></a>
             </div>
             <div class="col-7"><a href="login.php">Already Have a Account</a></div>
 
