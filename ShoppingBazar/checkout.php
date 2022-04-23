@@ -349,10 +349,13 @@ if ($_SESSION['cart'] == null) {
                 </div>
             </div>
         </div>
+
         <!-- cart-main-area end -->
          <script src="assets/ShopPage/js/bootstrap.bundle.min.js"></script>
 
-
+                <?php 
+                    include_once("prod_suggestion.php");
+                ?>
 
 
 <!-- performing checkouts -->
