@@ -64,6 +64,34 @@ $get_product=get_products_detail($con,$product_id);
 
 }
 }
+$pr =  array();
+$sql  = "SELECT `PR_id`, `Customer_id`, `Product_id`, `First_Name`, `Last_Name`, `Ratings`, `Comments` FROM `product_reviews` WHERE `Product_id` = '$product_id' ORDER BY `PR_id` DESC Limit 10 ";
+$result = mysqli_query($con,$sql); 
+
+ if ($result) {
+
+      while ($row = mysqli_fetch_assoc($result)) {
+        $pr[] = $row; 
+
+      }}
+$rating = null;
+$totalreviews = null;
+$sql = "SELECT COUNT(`PR_id`) as totalreviews , SUM(`Ratings`) as sum  FROM product_reviews WHERE `Product_id` = '$product_id'";
+$result = mysqli_query($con,$sql); 
+
+ if ($result) {
+
+      while ($row = mysqli_fetch_assoc($result)) {
+        if($row['totalreviews'] != 0)
+        {
+        $rating = round($row['sum'] / $row['totalreviews']); 
+
+        $totalreviews = $row['totalreviews'];
+    }
+
+      }}
+
+
 ?>
 
         <div class="body__overlay"></div>
@@ -154,7 +182,41 @@ $get_product=get_products_detail($con,$product_id);
                                 <h2 style="text-align: center; text-decoration: underline;"><?php echo $list['product_Name'] ?></h2>
                                 <ul  class="pro__prize">
                                 
-                                    <li><?php echo $list['product_sprice']."$" ?></li>
+                                    <li> <?php echo $list['product_sprice']."$" ?></li>
+                                </ul>
+                                    <ul class="rating">
+                                    <li> Rating :  <?php if ($rating ==5) {
+                                     echo '<i class="fas fa-star" style="color:#fc9803;"></i>
+                                            <i class="fas fa-star" style="color:#fc9803;"></i>
+                                            <i class="fas fa-star" style="color:#fc9803;"></i>
+                                            <i class="fas fa-star" style="color:#fc9803;"></i>
+                                            <i class="fas fa-star" style="color:#fc9803;"></i>';
+                                 }elseif ($rating ==4) {
+                                     echo '<i class="fas fa-star" style="color:#fc9803;"></i>
+                                            <i class="fas fa-star" style="color:#fc9803;"></i>
+                                            <i class="fas fa-star" style="color:#fc9803;"></i>
+                                            <i class="fas fa-star" style="color:#fc9803;"></i>
+                                           ';
+
+                                     
+                                 }elseif ($rating ==3) {
+                                     echo '<i class="fas fa-star" style="color:#fc9803;"></i>
+                                            <i class="fas fa-star" style="color:#fc9803;"></i>
+                                            <i class="fas fa-star" style="color:#fc9803;"></i>
+                                            ';
+                                     
+                                 }elseif ($rating ==2) {
+                                     echo '<i class="fas fa-star" style="color:#fc9803;"></i>
+                                            <i class="fas fa-star" style="color:#fc9803;"></i>
+                                            ';
+                                     
+                                 }elseif ($rating ==1) {
+                                     echo '<i class="fas fa-star" style="color:#fc9803;"></i>';
+                                     
+                                 } ?>(<?php if ($totalreviews !=null) {
+                                     echo $totalreviews;
+                                 }else{echo "Not rated yet";} ?>)</li>
+                                    
                                 </ul>
                                 <p class="pro__info"> <?php echo $list['product_Description'] ?></p>
                                 <div class="ht__pro__desc">
@@ -194,7 +256,86 @@ $get_product=get_products_detail($con,$product_id);
         ?>
             <!-- End Product Details Top -->
         </section>
+           <section class="htc__produc__decription bg__white">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xs-12">
+                        <!-- Start List And Grid View -->
+                        <ul class="pro__details__tab" role="tablist">
+                            <li role="presentation" class="description active"><a href="#description" role="tab" data-toggle="tab">Comments</a></li>
+                        </ul>
+                        <!-- End List And Grid View -->
+                    </div>
+                </div>
+            
+             <div class="row">
+                    <div class="col-xs-12">
+                        <div class="ht__pro__details__content">
+                            <!-- Start Single Content -->
+                            <div role="tabpanel" id="description" class="pro__single__content tab-pane fade in active">
+                                <div class="pro__tab__content__inner">
+                                    
+                                    <?php  
+                              if ($pr != null) {
+                              foreach ($pr as $key => $row) {
 
+                                    ?>
+                                  <h4 class="ht__pro__title"><?php echo $row["First_Name"].' '.$row["Last_Name"]; ?></h4> 
+                                  <h5 class="ht__pro__title">
+
+                                  <?php if ($row["Ratings"] ==5) {
+                                     echo '<i class="fas fa-star" style="color:#fc9803;"></i>
+                                            <i class="fas fa-star" style="color:#fc9803;"></i>
+                                            <i class="fas fa-star" style="color:#fc9803;"></i>
+                                            <i class="fas fa-star" style="color:#fc9803;"></i>
+                                            <i class="fas fa-star" style="color:#fc9803;"></i>';
+                                 }elseif ($row["Ratings"] ==4) {
+                                     echo '<i class="fas fa-star" style="color:#fc9803;"></i>
+                                            <i class="fas fa-star" style="color:#fc9803;"></i>
+                                            <i class="fas fa-star" style="color:#fc9803;"></i>
+                                            <i class="fas fa-star" style="color:#fc9803;"></i>
+                                           ';
+
+                                     
+                                 }elseif ($row["Ratings"] ==3) {
+                                     echo '<i class="fas fa-star" style="color:#fc9803;"></i>
+                                            <i class="fas fa-star" style="color:#fc9803;"></i>
+                                            <i class="fas fa-star" style="color:#fc9803;"></i>
+                                            ';
+                                     
+                                 }elseif ($row["Ratings"] ==2) {
+                                     echo '<i class="fas fa-star" style="color:#fc9803;"></i>
+                                            <i class="fas fa-star" style="color:#fc9803;"></i>
+                                            ';
+                                     
+                                 }elseif ($row["Ratings"] ==1) {
+                                     echo '<i class="fas fa-star" style="color:#fc9803;"></i>';
+                                     
+                                 }
+
+
+                                  ?>
+
+
+                             </h5>
+                                    <p><?php echo $row["Comments"];?></p><hr>
+
+                                        <?php
+
+                                     }}else{
+                                        echo  "No Comments added yet";
+                                     }
+                                 ?>
+                                  
+                                </div>
+                            </div>
+                            <!-- End Single Content -->
+                            
+                        </div>
+                    </div>
+                </div>
+                </div>
+</div></section>
 
     <?php 
      require('footer.php');

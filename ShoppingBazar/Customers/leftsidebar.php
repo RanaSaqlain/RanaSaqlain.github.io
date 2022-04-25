@@ -43,6 +43,12 @@ if ($_SESSION["Customer_id"] == "" ){
                 <span class="nav-link-text">Curent Order Details</span>
               </a>
             </li>
+            <li class="nav-item">
+              <a class="nav-link" href="ReviewProduct.php">
+                <i class="ni ni-tv-2 text-primary"></i>
+                <span class="nav-link-text">Review Product</span>
+              </a>
+            </li>
              <li class="nav-item">
               <a class="nav-link" href="CustomerProfile.php">
                 <i class="ni ni-tv-2 text-primary"></i>

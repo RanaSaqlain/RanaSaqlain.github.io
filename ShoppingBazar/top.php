@@ -39,7 +39,9 @@ $counter = 0;
     <link rel="stylesheet" href="assets/ShopPage/css/responsive.css">
     <!-- User style -->
     <link rel="stylesheet" href="assets/ShopPage/css/custom.css">
-
+    <!-- Font awesome -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/
+font-awesome/5.15.2/css/all.min.css"/>
 
     <!-- Modernizr JS -->
     <script src="assets/ShopPage/js/vendor/modernizr-3.5.0.min.js"></script>

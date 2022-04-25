@@ -84,6 +84,55 @@
                                             <li><?php echo $list['product_sprice']."$" ?></li>
                                         </ul>
                                     </div>
+                                    <ul class="fr__pro__prize">
+                                        
+                                            <li><?php 
+                                                $product_id = $list['product_id'];
+                                $rating = null;
+                                $totalreviews = null;
+                                $sql = "SELECT COUNT(`PR_id`) as totalreviews , SUM(`Ratings`) as sum  FROM product_reviews WHERE `Product_id` = '$product_id'";
+                                $result = mysqli_query($con,$sql); 
+
+                                 if ($result) {
+
+                                      while ($row = mysqli_fetch_assoc($result)) {
+                                        if($row['totalreviews'] != 0)
+                                        {
+                                        $rating = round($row['sum'] / $row['totalreviews']); 
+                                        $totalreviews = $row['totalreviews'];
+                                    }
+
+                                      }}
+                                            if ($rating ==5) {
+                                     echo '<i class="fas fa-star" style="color:#fc9803;"></i>
+                                            <i class="fas fa-star" style="color:#fc9803;"></i>
+                                            <i class="fas fa-star" style="color:#fc9803;"></i>
+                                            <i class="fas fa-star" style="color:#fc9803;"></i>
+                                            <i class="fas fa-star" style="color:#fc9803;"></i>'.'('.$totalreviews.')';
+                                 }elseif ($rating ==4) {
+                                     echo '<i class="fas fa-star" style="color:#fc9803;"></i>
+                                            <i class="fas fa-star" style="color:#fc9803;"></i>
+                                            <i class="fas fa-star" style="color:#fc9803;"></i>
+                                            <i class="fas fa-star" style="color:#fc9803;"></i>
+                                           '.'('.$totalreviews.')';
+
+                                     
+                                 }elseif ($rating ==3) {
+                                     echo '<i class="fas fa-star" style="color:#fc9803;"></i>
+                                            <i class="fas fa-star" style="color:#fc9803;"></i>
+                                            <i class="fas fa-star" style="color:#fc9803;"></i>
+                                            '.'('.$totalreviews.')';
+                                     
+                                 }elseif ($rating ==2) {
+                                     echo '<i class="fas fa-star" style="color:#fc9803;"></i>
+                                            <i class="fas fa-star" style="color:#fc9803;"></i>
+                                            '.'('.$totalreviews.')';
+                                     
+                                 }elseif ($rating ==1) {
+                                     echo '<i class="fas fa-star" style="color:#fc9803;"></i>'.'('.$totalreviews.')';
+                                     
+                                 }else{ echo " NoT Rated";}  ?></li>
+                                        </ul>
                                 </div>
                             </div>
                              <?php
@@ -110,15 +159,56 @@
                                                     <div class="htc__list__details">
                                                         <h2><a href="ProductDetail.php?id=<?php echo $list['product_id'] ?>"><?php echo $list['product_Name'] ?> </a></h2>
                                                         <ul  class="pro__prize">
-                                                            <li class="old__prize">$<?php echo $list['product_sprice']?></li>
-                                                            <li>$75.2</li>
+                                                            <li >$<?php echo $list['product_sprice']?></li>
+                                                           
                                                         </ul>
                                                         <ul class="rating">
-                                                            <li><i class="icon-star icons"></i></li>
-                                                            <li><i class="icon-star icons"></i></li>
-                                                            <li><i class="icon-star icons"></i></li>
-                                                            <li class="old"><i class="icon-star icons"></i></li>
-                                                            <li class="old"><i class="icon-star icons"></i></li>
+                                                            <?php 
+                                                $product_id = $list['product_id'];
+                                $rating = null;
+                                $totalreviews = null;
+                                $sql = "SELECT COUNT(`PR_id`) as totalreviews , SUM(`Ratings`) as sum  FROM product_reviews WHERE `Product_id` = '$product_id'";
+                                $result = mysqli_query($con,$sql); 
+
+                                 if ($result) {
+
+                                      while ($row = mysqli_fetch_assoc($result)) {
+                                        if($row['totalreviews'] != 0)
+                                        {
+                                        $rating = round($row['sum'] / $row['totalreviews']); 
+                                        $totalreviews = $row['totalreviews'];
+                                    }
+
+                                      }}
+                                            if ($rating ==5) {
+                                     echo '<i class="fas fa-star" style="color:#fc9803;"></i>
+                                            <i class="fas fa-star" style="color:#fc9803;"></i>
+                                            <i class="fas fa-star" style="color:#fc9803;"></i>
+                                            <i class="fas fa-star" style="color:#fc9803;"></i>
+                                            <i class="fas fa-star" style="color:#fc9803;"></i>'.'('.$totalreviews.')';
+                                 }elseif ($rating ==4) {
+                                     echo '<i class="fas fa-star" style="color:#fc9803;"></i>
+                                            <i class="fas fa-star" style="color:#fc9803;"></i>
+                                            <i class="fas fa-star" style="color:#fc9803;"></i>
+                                            <i class="fas fa-star" style="color:#fc9803;"></i>
+                                           '.'('.$totalreviews.')';
+
+                                     
+                                 }elseif ($rating ==3) {
+                                     echo '<i class="fas fa-star" style="color:#fc9803;"></i>
+                                            <i class="fas fa-star" style="color:#fc9803;"></i>
+                                            <i class="fas fa-star" style="color:#fc9803;"></i>
+                                            '.'('.$totalreviews.')';
+                                     
+                                 }elseif ($rating ==2) {
+                                     echo '<i class="fas fa-star" style="color:#fc9803;"></i>
+                                            <i class="fas fa-star" style="color:#fc9803;"></i>
+                                            '.'('.$totalreviews.')';
+                                     
+                                 }elseif ($rating ==1) {
+                                     echo '<i class="fas fa-star" style="color:#fc9803;"></i>'.'('.$totalreviews.')';
+                                     
+                                 }else{ echo " NoT Rated";}  ?>
                                                         </ul>
                                                         <p><?php echo $list['product_Description'] ?></p>
                                                         <div class="fr__list__btn">

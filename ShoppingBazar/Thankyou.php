@@ -66,7 +66,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             </div>
         </div>
         <!-- End Bradcaump area -->
-        <div class="row text-center">
+        <div class="row text-center" style="margin:3rem;">
         	<span class="col-md-12 text-success h2"> Thank You for Shopping At Shopping Bazar</span>
 
         		<span class="col-md-12 text-danger h1">
@@ -74,7 +74,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         				// code...
         			} ?>
         		</span>
-                <h3> Your Current Password is  : 12345678    </h3>
+                <h3 style="margin:2rem;"> Your Current Password is  : <b> 12345678 </b>  if haven't changed  </h3>
                 <h5> You can change is after login</h5>
         </div>
         		

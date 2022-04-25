@@ -1,5 +1,28 @@
 <?php
 require_once "loader.php";
+include_once("../db.php");
+$customer_id=null;
+$detail = array();
+if(session_id() == "")
+{
+  session_start();
+}
+if(isset($_SESSION["Customer_id"]))
+{
+
+$customer_id = $_SESSION['Customer_id'];
+}
+
+$sql = "SELECT `sp_id`,`Review_status`,`product_id`,`p_name`,`P_image`,`order_id` FROM soldproducts WHERE `Customer_id` = '$customer_id' ORDER BY  `sp_id` DESC;";
+$result = mysqli_query($con,$sql); 
+
+ if ($result) {
+
+      while ($row = mysqli_fetch_assoc($result)) {
+        $detail[] = $row; 
+
+      }}
+ 
 ?>
 <!DOCTYPE html>
 <html>
@@ -35,35 +58,55 @@ include("topnav.php");
  ?>
     <!-- Header -->
     <!-- Header -->
-    <div class="header  pb-6 col-12" style="background:#c2ca35" >
-      <div class="container-fluid">
-        <div class="header-body">
-          <div class="row align-items-center py-4">
-            <div class="col-lg-6 col-7">
-              <h6 class="h2 text-white d-inline-block mb-0">Customers</h6>
-              <nav aria-label="breadcrumb" class="d-none d-md-inline-block ml-md-4">
-                <ol class="breadcrumb breadcrumb-links breadcrumb-dark">
-                  <li class="breadcrumb-item"><a href="#"><i class="fas fa-home"></i></a></li>
-                  <li class="breadcrumb-item active" aria-current="page">Hi</li>
-                </ol>
-              </nav>
-            </div>
-            <div class="col-lg-6 col-5 text-right">
-              <a href="#" class="btn btn-sm btn-neutral">New</a>
-              <a href="#" class="btn btn-sm btn-neutral">Filters</a>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-   
     
+        <div class="container">
+          
+                  <h2 class="text-center">My bought Products</h2>
+
+                   <table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Name</th>
+      <th scope="col">Image</th>
+      <th scope="col">Review</th>
+      
+    </tr>
+  </thead>
+  <tbody>
+     <?php  
+        if ($detail != null) {
+          foreach ($detail as $key => $row) {
+          
+       ?>
+    <tr>
+     <th scope="row"> <?php  echo $row["p_name"];  ?></th>     
+      <td> <img src="<?php   echo  "../".$row["P_image"]; ?>" alt="..." class="img-thumbnail" style="max-height: 5rem;"> </td>
+
+
+      <td><?php  if ($row['Review_status'] == "None") {
+          echo '<a href="review_product.php?id='.$row["product_id"].'" class="btn btn-success" > Review</a>';
+      }else{
+        echo '<a href="review_product.php?id='.$row["product_id"].'" class="btn btn-warning" >Edit Review</a>';
+      } ?>      </td>
+
+
+    </tr>
+     <?php     
+   }
+ }  ?> 
+  </tbody>
+</table>
+
+
+        </div>
+    
+ 
       <!-- Footer -->
     <?php
     include "footer.php";
 
     ?>
-    </div>
+   
   </div>
    <script src="../assets/vendor/jquery/dist/jquery.min.js"></script>
   <script src="../assets/vendor/bootstrap/dist/js/bootstrap.bundle.min.js"></script>

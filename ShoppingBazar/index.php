@@ -56,6 +56,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 }
 }
+
+
 ?>
 
        <div class="body__overlay"></div>
@@ -204,6 +206,55 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                             <li><?php echo $list['product_sprice']."$" ?></li>
                                         </ul>
                                     </div>
+                                    <ul class="fr__pro__prize">
+                                        
+                                            <li><?php 
+                                                $product_id = $list['product_id'];
+                                $rating = null;
+                                $totalreviews = null;
+                                $sql = "SELECT COUNT(`PR_id`) as totalreviews , SUM(`Ratings`) as sum  FROM product_reviews WHERE `Product_id` = '$product_id'";
+                                $result = mysqli_query($con,$sql); 
+
+                                 if ($result) {
+
+                                      while ($row = mysqli_fetch_assoc($result)) {
+                                        if($row['totalreviews'] != 0)
+                                        {
+                                        $rating = round($row['sum'] / $row['totalreviews']); 
+                                        $totalreviews = $row['totalreviews'];
+                                    }
+
+                                      }}
+                                            if ($rating ==5) {
+                                     echo '<i class="fas fa-star" style="color:#fc9803;"></i>
+                                            <i class="fas fa-star" style="color:#fc9803;"></i>
+                                            <i class="fas fa-star" style="color:#fc9803;"></i>
+                                            <i class="fas fa-star" style="color:#fc9803;"></i>
+                                            <i class="fas fa-star" style="color:#fc9803;"></i>'.'('.$totalreviews.')';
+                                 }elseif ($rating ==4) {
+                                     echo '<i class="fas fa-star" style="color:#fc9803;"></i>
+                                            <i class="fas fa-star" style="color:#fc9803;"></i>
+                                            <i class="fas fa-star" style="color:#fc9803;"></i>
+                                            <i class="fas fa-star" style="color:#fc9803;"></i>
+                                           '.'('.$totalreviews.')';
+
+                                     
+                                 }elseif ($rating ==3) {
+                                     echo '<i class="fas fa-star" style="color:#fc9803;"></i>
+                                            <i class="fas fa-star" style="color:#fc9803;"></i>
+                                            <i class="fas fa-star" style="color:#fc9803;"></i>
+                                            '.'('.$totalreviews.')';
+                                     
+                                 }elseif ($rating ==2) {
+                                     echo '<i class="fas fa-star" style="color:#fc9803;"></i>
+                                            <i class="fas fa-star" style="color:#fc9803;"></i>
+                                            '.'('.$totalreviews.')';
+                                     
+                                 }elseif ($rating ==1) {
+                                     echo '<i class="fas fa-star" style="color:#fc9803;"></i>'.'('.$totalreviews.')';
+                                     
+                                 }else{ echo " NoT Rated";}  ?></li>
+                                        </ul>
                                 </div>
                             </div>
                                 
