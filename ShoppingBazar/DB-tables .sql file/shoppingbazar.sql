@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.5
+-- version 4.9.0.1
 -- https://www.phpmyadmin.net/
 --
--- Host: localhost:3306
--- Generation Time: Apr 25, 2022 at 09:26 AM
--- Server version: 5.7.33
--- PHP Version: 7.4.19
+-- Host: 127.0.0.1
+-- Generation Time: Jun 05, 2022 at 09:02 AM
+-- Server version: 10.4.6-MariaDB
+-- PHP Version: 7.3.9
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -57,7 +57,7 @@ INSERT INTO `admin` (`Admin_ID`, `FName`, `LName`, `Email`, `password`, `Age`, `
 CREATE TABLE `category` (
   `Category_ID` int(11) NOT NULL,
   `Category_Name` varchar(50) NOT NULL,
-  `Category_Status` int(11) NOT NULL DEFAULT '1'
+  `Category_Status` int(11) NOT NULL DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -102,7 +102,7 @@ CREATE TABLE `customer` (
 
 INSERT INTO `customer` (`id`, `Email`, `Password`, `Stripe_id`, `First_Name`, `Last_Name`, `Street`, `House`, `City`, `Zipcode`, `Phone`) VALUES
 (1, 'test@test.com', '12345678', '0000', 'Test', 'user', 'Sargodha , Pakistan', 'h4', 'Sargodha', '40100', '03447867'),
-(2, 'msaqlain6666@gmail.com', '12345678', 'cus_LPq6483kkV4LyO', 'Muhammad', 'Saqlain', 'h#3, test apartments', 'h4', 'Sargodha', '40100', '98989898'),
+(2, 'msaqlain6666@gmail.com', '123456', 'cus_LPq6483kkV4LyO', 'Muhammad', 'Saqlain', 'h#3, test apartments', 'h4', 'Sargodha', '40100', '98989898'),
 (3, 'john@gmail.com', '12345678', '0000', 'john', 'Deen', 'Street1', ' 1', 'NewYork', '89711', '123331111'),
 (5, 'sharjeel90000@gmail.com', '123123', 'Not Order Yet', 'Sharjeel', 'ahmed', '4', 'h5', 'Sargodha', '40100', '03099930195');
 
@@ -118,18 +118,129 @@ CREATE TABLE `manager` (
   `Email` varchar(50) NOT NULL,
   `Password` varchar(100) NOT NULL,
   `MobileNo` varchar(50) NOT NULL,
-  `DateAndTIme` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
+  `StartingTime` datetime NOT NULL,
+  `EndingTime` varchar(30) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `manager`
 --
 
-INSERT INTO `manager` (`mid`, `Name`, `Email`, `Password`, `MobileNo`, `DateAndTIme`) VALUES
-(4, 'Sharjeel Ahmed', 'sharjeeelahmed833195@gmail.com', 'Shar*1234', '030999301958', '2022-01-14 18:03:21'),
-(5, 'Baqir Alii', 'baqir@gmail.com', '7777', '03099930195', '2022-01-14 18:47:18'),
-(14, 'Muhammad Saqlain', 'msaqlain6666@gmail.com', '12345', '034407', '2022-01-16 18:44:17'),
-(17, 'Test user', 'test@test.com', 'test', '03440794447', '2022-01-16 18:53:37');
+INSERT INTO `manager` (`mid`, `Name`, `Email`, `Password`, `MobileNo`, `StartingTime`, `EndingTime`) VALUES
+(1, 'baqir ', 'baqir@gmail.com', '7777', '1234567890', '2022-05-21 08:08:00', '2022-05-28T01:09');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `manageractivity`
+--
+
+CREATE TABLE `manageractivity` (
+  `id_Ma` int(11) NOT NULL,
+  `manager_id` int(11) DEFAULT NULL,
+  `logintime` varchar(30) DEFAULT NULL,
+  `logouttime` varchar(30) DEFAULT NULL,
+  `activity` varchar(30) DEFAULT NULL,
+  `curenttime` varchar(30) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `manageractivity`
+--
+
+INSERT INTO `manageractivity` (`id_Ma`, `manager_id`, `logintime`, `logouttime`, `activity`, `curenttime`) VALUES
+(38, 1, '202205221128', NULL, 'logintime', '202205221128'),
+(39, 1, NULL, '202205221128', 'index/home', '202205221128'),
+(40, 1, '202205221128', NULL, 'logintime', '202205221128'),
+(41, 1, NULL, '202205221128', 'index/home', '202205221128'),
+(42, 1, '202205221128', NULL, 'logintime', '202205221128'),
+(43, 1, NULL, '202205221128', 'Product Management', '202205221128'),
+(44, 1, '202205221128', NULL, 'logintime', '202205221128'),
+(45, 1, NULL, '202205221132', 'index/home', '202205221132'),
+(47, 1, '202205221134', NULL, 'logintime', '202205221134'),
+(48, 1, NULL, '202205221134', 'order Management', '202205221134'),
+(49, 1, '202205221135', NULL, 'logintime', '202205221135'),
+(50, 1, NULL, '202205221146', 'Category Management', '202205221146'),
+(51, 1, '202205221146', NULL, 'logintime', '202205221146'),
+(52, 1, NULL, '202205221147', 'order Management', '202205221147'),
+(54, 1, '202205221150', NULL, 'logintime', '202205221150'),
+(55, 1, NULL, '202205221200', 'Product Management', '202205221200'),
+(56, 1, '202205221305', NULL, 'logintime', '202205221305'),
+(57, 1, NULL, '202205221306', 'index/home', '202205221306'),
+(58, 1, '202205221306', NULL, 'logintime', '202205221306'),
+(59, 1, NULL, '202205221306', 'Category Management', '202205221306'),
+(60, 1, '202205221306', NULL, 'logintime', '202205221306'),
+(61, 1, NULL, '202205221317', 'Product Management', '202205221317'),
+(62, 1, '202205291058', NULL, 'logintime', '202205291058'),
+(63, 1, NULL, '202205291058', 'index/home', '202205291058'),
+(64, 1, '202205301117', NULL, 'logintime', '202205301117'),
+(65, 1, NULL, '202205301119', 'index/home', '202205301119'),
+(66, 1, '202206031636', NULL, 'logintime', '202206031636'),
+(67, 1, NULL, '202206031636', 'index/home', '202206031636'),
+(70, 1, '202206031638', NULL, 'logintime', '202206031638'),
+(71, 1, NULL, '202206031638', 'Product Management', '202206031638'),
+(74, 1, '202206041116', NULL, 'logintime', '202206041116'),
+(75, 1, NULL, '202206041117', 'index/home', '202206041117'),
+(76, 1, '202206041117', NULL, 'logintime', '202206041117'),
+(77, 1, NULL, '202206041118', 'order Management', '202206041118'),
+(78, 1, '202206041118', NULL, 'logintime', '202206041118'),
+(79, 1, NULL, '202206041119', 'order Management', '202206041119'),
+(80, 1, '202206041119', NULL, 'logintime', '202206041119'),
+(81, 1, NULL, '202206041119', 'order Management', '202206041119'),
+(82, 1, '202206041119', NULL, 'logintime', '202206041119'),
+(83, 1, NULL, '202206041120', 'order Management', '202206041120'),
+(84, 1, '202206041120', NULL, 'logintime', '202206041120'),
+(85, 1, NULL, '202206041121', 'order Management', '202206041121'),
+(86, 1, '202206041121', NULL, 'logintime', '202206041121'),
+(87, 1, NULL, '202206041121', 'order Management', '202206041121'),
+(88, 1, '202206041121', NULL, 'logintime', '202206041121'),
+(89, 1, NULL, '202206041122', 'order Management', '202206041122'),
+(90, 1, '202206041122', NULL, 'logintime', '202206041122'),
+(91, 1, NULL, '202206041123', 'order Management', '202206041123'),
+(92, 1, '202206041123', NULL, 'logintime', '202206041123'),
+(93, 1, NULL, '202206041123', 'order Management', '202206041123'),
+(94, 1, '202206041123', NULL, 'logintime', '202206041123'),
+(95, 1, NULL, '202206041123', 'index/home', '202206041123'),
+(96, 1, '202206041123', NULL, 'logintime', '202206041123'),
+(97, 1, NULL, '202206041149', 'Product Management', '202206041149'),
+(99, 1, '202206041911', NULL, 'logintime', '202206041911'),
+(100, 1, NULL, '202206041911', 'index/home', '202206041911'),
+(101, 1, NULL, '202206041912', 'order Management', '202206041912'),
+(102, 1, '202206041912', NULL, 'logintime', '202206041912'),
+(103, 1, NULL, '202206041913', 'order Management', '202206041913'),
+(105, 1, '202206050709', NULL, 'logintime', '202206050709'),
+(106, 1, NULL, '202206050709', 'index/home', '202206050709'),
+(107, 1, '202206050709', NULL, 'logintime', '202206050709'),
+(108, 1, NULL, '202206050717', 'Product Management', '202206050717'),
+(109, 1, '202206050717', NULL, 'logintime', '202206050717'),
+(110, 1, NULL, '202206050832', 'Product Management', '202206050832'),
+(111, 1, '202206050832', NULL, 'logintime', '202206050832'),
+(112, 1, NULL, '202206050832', 'index/home', '202206050832'),
+(113, 1, '202206050832', NULL, 'logintime', '202206050832'),
+(114, 1, NULL, '202206050832', 'order Management', '202206050832'),
+(115, 1, '202206050832', NULL, 'logintime', '202206050832'),
+(116, 1, NULL, '202206050832', 'order Management', '202206050832'),
+(117, 1, '202206050832', NULL, 'logintime', '202206050832'),
+(118, 1, NULL, '202206050901', 'order Management', '202206050901');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `m_active_time`
+--
+
+CREATE TABLE `m_active_time` (
+  `ID` int(11) NOT NULL,
+  `active_time` varchar(30) NOT NULL,
+  `manager_id` varchar(30) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `m_active_time`
+--
+
+INSERT INTO `m_active_time` (`ID`, `active_time`, `manager_id`) VALUES
+(1, '272', '1');
 
 -- --------------------------------------------------------
 
@@ -151,11 +262,11 @@ CREATE TABLE `orders` (
 --
 
 INSERT INTO `orders` (`order_id`, `Customer_id`, `Amount`, `Payment_method`, `order_Status`, `orderTime`) VALUES
-(1, 1, '100', 'Stripe', 'Active', 'Wednesday 30th of March 2022 02:06:47 PM'),
-(2, 2, '700', 'Stripe', 'Active', 'Wednesday 30th of March 2022 02:15:10 PM'),
-(3, 3, '789', 'COD', 'Active', 'Wednesday 30th of March 2022 02:17:24 PM'),
-(4, 3, '234', 'COD', 'Active', 'Saturday 23rd of April 2022 11:24:22 AM'),
-(5, 1, '67', 'COD', 'Active', 'Monday 25th of April 2022 09:08:43 AM');
+(1, 1, '100', 'Stripe', '1', 'Wednesday 30th of March 2022 02:06:47 PM'),
+(2, 2, '700', 'Stripe', '1', 'Wednesday 30th of March 2022 02:15:10 PM'),
+(3, 3, '789', 'COD', '1', 'Wednesday 30th of March 2022 02:17:24 PM'),
+(4, 3, '234', 'COD', '1', 'Saturday 23rd of April 2022 11:24:22 AM'),
+(5, 1, '67', 'COD', '0', 'Monday 25th of April 2022 09:08:43 AM');
 
 -- --------------------------------------------------------
 
@@ -173,7 +284,7 @@ CREATE TABLE `products` (
   `product_instock` int(11) NOT NULL,
   `product_Image` varchar(100) NOT NULL DEFAULT 'assets/ProductImages/Default.png',
   `C_ID` int(11) NOT NULL,
-  `product_Status` int(11) NOT NULL DEFAULT '1',
+  `product_Status` int(11) NOT NULL DEFAULT 1,
   `product_img_admin` varchar(400) NOT NULL DEFAULT '../assets/ProductImages/Default.png'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -341,6 +452,18 @@ ALTER TABLE `manager`
   ADD UNIQUE KEY `Email` (`Email`);
 
 --
+-- Indexes for table `manageractivity`
+--
+ALTER TABLE `manageractivity`
+  ADD PRIMARY KEY (`id_Ma`);
+
+--
+-- Indexes for table `m_active_time`
+--
+ALTER TABLE `m_active_time`
+  ADD PRIMARY KEY (`ID`);
+
+--
 -- Indexes for table `orders`
 --
 ALTER TABLE `orders`
@@ -392,7 +515,7 @@ ALTER TABLE `admin`
 -- AUTO_INCREMENT for table `category`
 --
 ALTER TABLE `category`
-  MODIFY `Category_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
+  MODIFY `Category_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
 
 --
 -- AUTO_INCREMENT for table `customer`
@@ -404,7 +527,19 @@ ALTER TABLE `customer`
 -- AUTO_INCREMENT for table `manager`
 --
 ALTER TABLE `manager`
-  MODIFY `mid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `mid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `manageractivity`
+--
+ALTER TABLE `manageractivity`
+  MODIFY `id_Ma` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=119;
+
+--
+-- AUTO_INCREMENT for table `m_active_time`
+--
+ALTER TABLE `m_active_time`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `orders`

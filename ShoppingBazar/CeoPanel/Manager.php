@@ -22,7 +22,6 @@ require_once "auth_session.php";
   <!-- Argon CSS -->
 
      <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
      <link rel="stylesheet" href="../assets/css/argon.css?v=1.2.0" type="text/css">
 
 
@@ -129,20 +128,32 @@ End Of Modal -->
             <label>Mobile No</label>
             <input type="text" name="" id="managermobile" placeholder="Enter Mobile No" class="form-control">
         </div>
-
+        <div class="row">
+          <div class="col-4"> <hr> </div>
+          <h4 class="col-4 mt-4"> UTC Time Zone</h4>
+          <div class="col-4"> <hr> </div>
+        </div>
+          
+<div class="form-group">
+            <label>Start Job day </label>
+            <input type="datetime-local" name="" id="managerdates"  value="<?php echo  date("Y-m-d")."T".date("h:i"); ?>" class="form-control" readonly="">
+        </div><div class="form-group">
+            <label>End  Job Day </label>
+            <input type="datetime-local" name="" id="managerdatee"  class="form-control">
+        </div>
 
       </div>
-      </div>
+      
 
   <div class="modal-footer">
-        <button type="submit" name="Submit" value="Submit" class="btn btn-success" data-dismiss="modal" onclick="AddManager()">Add Manager</button>
-        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+        <button type="submit" id="addmanager" name="Submit" style="cursor: pointer;" value="Submit" class="btn btn-success" data-dismiss="modal">Add Manager</button>
+        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
       </div>
       </form>
     </div>
   </div>
 </div>
-
+</div>
 </div>
 
 
@@ -153,7 +164,6 @@ End Of Modal -->
     </div>
   </div>
    <script src="../assets/vendor/jquery/dist/jquery.min.js"></script>
- 
   <script src="../assets/vendor/js-cookie/js.cookie.js"></script>
   <script src="../assets/vendor/jquery.scrollbar/jquery.scrollbar.min.js"></script>
   <script src="../assets/vendor/jquery-scroll-lock/dist/jquery-scrollLock.min.js"></script>
@@ -168,6 +178,12 @@ End Of Modal -->
  <script type="text/javascript">
     $(document).ready(function(){
 ReadRecord();
+    $("#addform").on("submit",function(e){
+        e.preventDefault();
+        
+      AddManager();
+    });
+
     });
 
 
@@ -187,12 +203,14 @@ ReadRecord();
 
     function AddManager()
      {
+
       var managername=$('#managername').val();
        var manageremail=$('#manageremail').val();
        var managerpass=$('#managerpass').val();
        var managermobile=$('#managermobile').val();
-
-
+        var managerdates=$('#managerdates').val();
+        var managerdatee=$('#managerdatee').val();
+          
 
        $.ajax({
          url:"Managerdb.php",
@@ -200,7 +218,9 @@ ReadRecord();
          data:{managername: managername,
             manageremail: manageremail,
             managerpass: managerpass,
-            managermobile : managermobile
+            managermobile : managermobile,
+            managerdates : managerdates,
+            managerdatee :managerdatee
          }, 
          success:function(data,status){
             

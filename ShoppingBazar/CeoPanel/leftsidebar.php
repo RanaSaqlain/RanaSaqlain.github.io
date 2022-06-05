@@ -32,6 +32,18 @@ require_once "loader.php";
               </a>
             </li>
             <li class="nav-item">
+              <a class="nav-link" href="Categories.php">
+                <i class="ni ni-tv-2 text-primary"></i>
+                <span class="nav-link-text">Categories</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="products.php">
+                <i class="ni ni-tv-2 text-primary"></i>
+                <span class="nav-link-text">Products</span>
+              </a>
+            </li>
+            <li class="nav-item">
               <a class="nav-link" href="order-details.php">
                 <i class="ni ni-tv-2 text-primary"></i>
                 <span class="nav-link-text">Order Details</span>

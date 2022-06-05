@@ -62,16 +62,16 @@ include("topnav.php");
    <div class="col-md-12 col-lg-12 col-sm-12">
                         <div class="white-box">
                           
-                            <div class="table-responsive">
+                            <div class="table-responsive" style="margin-top:30px;">
                                 <table class="table no-wrap" id="myTable">
     
                                     <thead>
                                         <tr>
                                             <th class="border-top-0">Order ID</th>
                                             <th class="border-top-0">Customer Name</th>
-                                            <th class="border-top-0">Status</th>
                                             <th class="border-top-0">Date</th>
-                                            <th class="border-top-0">Price</th>
+                                            <th class="border-top-0">Prices</th>
+                                            <th class="border-top-0">Status</th>
                                         </tr>
                                     </thead>
 
@@ -100,12 +100,21 @@ include("topnav.php");
 
                                    
 
-                                            <td><?php
-                                        echo $list['order_Status']?></td>
+                                          
                                             <td class="txt-oflo"><?php
                                         echo $list['orderTime']?></td>
                                             <td><span class="text-success"><?php
                                         echo $list['Amount']?></span></td>
+                                        <td><?php
+                                        if($list['order_Status']==1)
+                                        {
+                                            echo '<p><a href="status.php?order_id='.$list['order_id'].'&order_Status=0" class="btn btn-success">Active</a></p>';
+                                        }
+                                        else
+                                        {
+                                         echo '<p><a href="status.php?order_id='.$list['order_id'].'&order_Status=1" class="btn btn-danger" style="opacity:40%; color:black;">Cancelled</a></p>';   
+                                        }
+                                        ?></td>
                                         </tr>
                                     <?php } ?>
                                      
@@ -121,6 +130,24 @@ include("topnav.php");
         $(document).ready( function () {
     $('#myTable').DataTable();
 } );
+    </script>
+    <script type="text/javascript">
+         $(document).ready(function() {
+
+            
+           $(window).on("beforeunload", function() { 
+              $.ajax({
+                      url:"function.php",
+                      method:"post",
+                      dataType:"json",
+                      data:{opp:"logoutmanager",page:"order Management"},
+                      success:function(response){
+                       
+
+        }
+     });
+            });
+        });
     </script>
 </body>
 

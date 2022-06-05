@@ -66,6 +66,25 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 }
 
 ?>
+<style type="text/css">
+    .rating {
+  unicode-bidi: bidi-override;
+  direction: rtl;
+  width: 100px;
+}
+.rating > span {
+  display: inline-block;
+  position: relative;
+  width: 1.5em;
+  height: 1.5em;
+  font-size:25px;
+}
+.rating > span:hover:before,
+.rating > span:hover ~ span:before {
+   content: "\2605";
+   position: absolute;
+}
+</style>
      <div class="body__overlay"></div>
         <!-- Start Offset Wrapper -->
         <div class="offset__wrapper">
@@ -233,7 +252,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                  }elseif ($rating ==1) {
                                      echo '<i class="fas fa-star" style="color:#fc9803;"></i>'.'('.$totalreviews.')';
                                      
-                                 }else{ echo " NoT Rated";}  ?></li>
+                                 }else{ echo'<div class="rating">
+<span>☆</span><span>☆</span><span>☆</span><span>☆</span><span>☆</span>
+</div>';}  ?></li>
                                         </ul>
                                 </div>
                             </div>
@@ -310,7 +331,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                  }elseif ($rating ==1) {
                                      echo '<i class="fas fa-star" style="color:#fc9803;"></i>'.'('.$totalreviews.')';
                                      
-                                 }else{ echo " NoT Rated";}  ?>
+                                 }else{ echo'<div class="rating">
+<span>☆</span><span>☆</span><span>☆</span><span>☆</span><span>☆</span>
+</div>';}  ?>
                                                         </ul>
                                                         <p><?php echo $list['product_Description'] ?></p>
                                                         <div class="fr__list__btn ">

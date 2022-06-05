@@ -21,6 +21,8 @@ require_once "loader.php";
   <!-- Page plugins -->
   <!-- Argon CSS -->
   <link rel="stylesheet" href="../assets/css/argon.css?v=1.2.0" type="text/css">
+ 
+
 </head>
 
 <body style="width:98.9%;">
@@ -68,8 +70,28 @@ include("topnav.php");
     ?>
     </div>
   </div>
- 
-  <script src="../assets/vendor/jquery/dist/jquery.min.js"></script>
+    
+<script src="../assets/ShopPage/js/vendor/jquery-3.2.1.min.js"></script>
+ <script type="text/javascript">
+         $(document).ready(function() {
+       
+            
+           $(window).on("beforeunload", function() { 
+
+              $.ajax({
+                      url:"function.php",
+                      method:"post",
+                      dataType:"json",
+                      data:{opp:"logoutmanager",page:"index/home"},
+                      success:function(response){
+                       
+
+        }
+     });
+            });
+        });
+    </script>  
+   <!-- <script src="../assets/vendor/jquery/dist/jquery.min.js"></script> -->
   <script src="../assets/vendor/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
   <script src="../assets/vendor/js-cookie/js.cookie.js"></script>
   <script src="../assets/vendor/jquery.scrollbar/jquery.scrollbar.min.js"></script>
@@ -78,6 +100,7 @@ include("topnav.php");
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDTTfWur0PDbZWPr7Pmq8K3jiDp0_xUziI"></script>
   <!-- Argon JS -->
   <script src="../assets/js/argon.js?v=1.2.0"></script>
+ 
 </body>
 
 </html>

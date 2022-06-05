@@ -33,8 +33,10 @@ $data[]=$row;
   <!-- Page plugins -->
   <!-- Argon CSS -->
   <link rel="stylesheet" href="../assets/css/argon.css?v=1.2.0" type="text/css">
+  <link rel="stylesheet" type="text/css" href="assets/bootstrap/css/bootstrap.min.css">
      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
       <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.25/css/jquery.dataTables.min.css">
+
     <script
   src="https://code.jquery.com/jquery-3.6.0.js"
   integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
@@ -60,16 +62,16 @@ include("topnav.php");
                     <div class="col-md-12 col-lg-12 col-sm-12">
                         <div class="white-box">
                           
-                            <div class="table-responsive">
+                            <div class="table-responsive" style="margin-top:30px;">
                                 <table class="table no-wrap" id="myTable">
     
                                     <thead>
                                         <tr>
                                             <th class="border-top-0">Order ID</th>
                                             <th class="border-top-0">Customer Name</th>
-                                            <th class="border-top-0">Status</th>
-                                            <th class="border-top-0">Date</th>
                                             <th class="border-top-0">Price</th>
+                                            <th class="border-top-0">Date</th>
+                                            <th class="border-top-0">Status</th>
                                         </tr>
                                     </thead>
 
@@ -98,12 +100,21 @@ include("topnav.php");
 
                                    
 
-                                            <td><?php
-                                        echo $list['order_Status']?></td>
+                                            
                                             <td class="txt-oflo"><?php
                                         echo $list['orderTime']?></td>
                                             <td><span class="text-success"><?php
                                         echo $list['Amount']?></span></td>
+                                        <td><?php
+                                        if($list['order_Status']==1)
+                                        {
+                                            echo '<p><a href="status.php?order_id='.$list['order_id'].'&order_Status=0" class="btn btn-success">Actice</a></p>';
+                                        }
+                                        else
+                                        {
+                                          echo '<p><a href="status.php?order_id='.$list['order_id'].'&order_Status=1" class="btn btn-danger" style="opacity:40%;">Cancelled</a></p>';   
+                                        }
+                                        ?></td>
                                         </tr>
                                     <?php } ?>
                                      

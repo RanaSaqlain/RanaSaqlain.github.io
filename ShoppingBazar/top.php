@@ -157,12 +157,12 @@ font-awesome/5.15.2/css/all.min.css"/>
                                                         </ul>
                                                 </li>
 
-                                                <li><a class="mega__title" href="product-grid.html">ShopPages</a>
+                                                <li><a class="mega__title" href="">ShopPages</a>
                                                     <ul class="mega__item">
-                                                       <li><a href="#">About</a></li>
-                                                        <li><a href="#">Exchange Policies</a></li>
-                                                        <li><a href="#">Return Policies</a></li>
-                                                          <li><a href="#">Terms and Conditions</a></li> 
+                                                       <li><a href="about.php">About</a></li>
+                                                        <li><a href="policies.php#exchangepolicy">Exchange Policies</a></li>
+                                                        <li><a href="policies.php#returnpolicy">Return Policies</a></li>
+                                                          <li><a href="TermCondition.php">Terms and Conditions</a></li> 
                                                      </ul>
                                                 </li>
                                                 <!-- End Single Mega MEnu -->

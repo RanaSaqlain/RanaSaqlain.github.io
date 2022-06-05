@@ -59,6 +59,25 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 
 ?>
+<style type="text/css">
+    .rating {
+  unicode-bidi: bidi-override;
+  direction: rtl;
+  width: 100px;
+}
+.rating > span {
+  display: inline-block;
+  position: relative;
+  width: 1.5em;
+  height: 1.5em;
+  font-size:25px;
+}
+.rating > span:hover:before,
+.rating > span:hover ~ span:before {
+   content: "\2605";
+   position: absolute;
+}
+</style>
 
        <div class="body__overlay"></div>
         <!-- Start Offset Wrapper -->
@@ -251,9 +270,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                             '.'('.$totalreviews.')';
                                      
                                  }elseif ($rating ==1) {
-                                     echo '<i class="fas fa-star" style="color:#fc9803;"></i>'.'('.$totalreviews.')';
+                                     echo '<i class="fa-thin fas fa-star" style="color:#fc9803;"></i>'.'('.$totalreviews.')';
                                      
-                                 }else{ echo " NoT Rated";}  ?></li>
+                                 }else{ echo'<div class="rating">
+<span>☆</span><span>☆</span><span>☆</span><span>☆</span><span>☆</span>
+</div>';}  ?></li>
                                         </ul>
                                 </div>
                             </div>

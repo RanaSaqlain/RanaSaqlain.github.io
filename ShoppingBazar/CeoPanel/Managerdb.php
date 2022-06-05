@@ -12,6 +12,7 @@ extract($_POST);
        <th>Email</th>
        <th>Password</th>
        <th>Mobile No</th>
+       <th>Active Minutes on Site</th>
        <th>Edit</th>
       <th>Delete</th>
     </tr>
@@ -27,6 +28,9 @@ extract($_POST);
      	<td>'.$row['Email'].'</td>
      	<td>'.$row['Password'].'</td>
      	<td>'.$row['MobileNo'].'</td>
+        <td>
+        <a href="manageractive.php?id='.$row['mid'].'" class="btn btn-info" >check</a>
+      </td>
      	<td>
      	<button onclick="GetManagerDetails('.$row['mid'].')" class="btn btn-warning">Edit</button>
      	</td>
@@ -41,9 +45,9 @@ extract($_POST);
      echo $data; 
  }
 
-if(isset($_POST['managername']) && isset($_POST['manageremail']) && isset($_POST['managerpass']) && isset($_POST['managermobile']) )
+if(isset($_POST['managername']) && isset($_POST['manageremail']) && isset($_POST['managerpass']) && isset($_POST['managermobile']) && isset($_POST['managerdates']) && isset($_POST['managerdatee'] ) ) 
 {
-	$query="INSERT INTO `manager`( `Name`, `Email`, `Password`, `MobileNo`) VALUES ('$managername', '$manageremail','$managerpass','$managermobile')";
+	$query="INSERT INTO `manager`( `Name`, `Email`, `Password`, `MobileNo`,`StartingTime`,`EndingTime`) VALUES ('$managername', '$manageremail','$managerpass','$managermobile','$managerdates','$managerdatee')";
     $result= mysqli_query($con,$query);  
     if(!$result)
     {

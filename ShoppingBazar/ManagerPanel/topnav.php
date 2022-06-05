@@ -1,6 +1,31 @@
 <?php
 require_once "auth_session.php";
 require_once "loader.php";
+ require_once "../db.php";
+ $datelogin = date("YmdHi");
+ $managerid= "";
+ if(isset($_SESSION['Manager'])!="")
+ {
+   $managerid = $_SESSION['Manager']["id"] ;
+}
+$sql = "SELECT `id_Ma`,`logintime` FROM `manageractivity` WHERE `manager_id` = '$managerid' ORDER BY `id_Ma` DESC limit 1 ";
+$result = mysqli_query($con,$sql);
+$row = mysqli_fetch_assoc($result);
+if($row["logintime"] != "" )
+{
+  $id = $row["id_Ma"];
+$sql = "DELETE FROM `manageractivity` WHERE `id_Ma`= '$id'";
+$result = mysqli_query($con,$sql);
+ 
+}
+$sql =  "INSERT INTO `manageractivity`( `manager_id`, `logintime`, `activity`, `curenttime`) VALUES ('$managerid','$datelogin','logintime','$datelogin')";
+$result=mysqli_query($con,$sql);
+
+
+
+
+
+
 ?>
 
 <nav class="navbar navbar-top navbar-expand navbar-dark bg-primary border-bottom col-12">

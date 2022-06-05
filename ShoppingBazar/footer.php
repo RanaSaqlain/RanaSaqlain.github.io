@@ -32,11 +32,10 @@
                                 <h2 class="title__line--2">information</h2>
                                 <div class="ft__inner">
                                     <ul class="ft__list">
-                                        <li><a href="#">About us</a></li>
-                                        <li><a href="#">Delivery Information</a></li>
-                                        <li><a href="#">Privacy & Policy</a></li>
-                                        <li><a href="#">Terms  & Condition</a></li>
-                                        <li><a href="#">Manufactures</a></li>
+                                        <li><a href="about.php">About us</a></li>
+                                        <li><a href="faq.php">FAQ</a></li>
+                                        <li><a href="policies.php#privacypolicy">Privacy & Policy</a></li>
+                                        <li><a href="policies.php">Terms  & Condition</a></li>
                                     </ul>
                                 </div>
                             </div>
